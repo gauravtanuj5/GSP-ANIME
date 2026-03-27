@@ -138,43 +138,43 @@
   <div class="categories-grid">
     <a href="genres.html?g=Shonen" class="category-card cat-naruto">
       <div class="cat-img-wrap">
-        <img src="https://cdn.myanimelist.net/images/anime/13/17405.jpg" alt="Naruto" loading="lazy" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<span class=cat-fb-emoji>🍃</span>')">
+        <img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx20-YBNGqJkBaqbm.jpg" alt="Naruto" loading="lazy" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<span class=cat-fb-emoji>🍃</span>')">
       </div>
       <div class="cat-name">Naruto</div><div class="cat-count">720 Episodes</div>
     </a>
     <a href="genres.html?g=Action" class="category-card cat-dbz">
       <div class="cat-img-wrap">
-        <img src="https://cdn.myanimelist.net/images/anime/1277/142014.jpg" alt="Dragon Ball Z" loading="lazy" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<span class=cat-fb-emoji>💥</span>')">
+        <img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx813-2L5UoHqZ6yAl.jpg" alt="Dragon Ball Z" loading="lazy" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<span class=cat-fb-emoji>💥</span>')">
       </div>
       <div class="cat-name">Dragon Ball</div><div class="cat-count">508 Episodes</div>
     </a>
     <a href="anime-list.html" class="category-card cat-op">
       <div class="cat-img-wrap">
-        <img src="https://cdn.myanimelist.net/images/anime/6/73245.jpg" alt="One Piece" loading="lazy" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<span class=cat-fb-emoji>⚓</span>')">
+        <img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx21-YcayjnyAanMm.jpg" alt="One Piece" loading="lazy" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<span class=cat-fb-emoji>⚓</span>')">
       </div>
       <div class="cat-name">One Piece</div><div class="cat-count">1085 Episodes</div>
     </a>
     <a href="genres.html?g=Dark Fantasy" class="category-card cat-jjk">
       <div class="cat-img-wrap">
-        <img src="https://cdn.myanimelist.net/images/anime/1171/109222.jpg" alt="Jujutsu Kaisen" loading="lazy" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<span class=cat-fb-emoji>👁️</span>')">
+        <img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx113415-979NCMpMBj6l.jpg" alt="Jujutsu Kaisen" loading="lazy" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<span class=cat-fb-emoji>👁️</span>')">
       </div>
       <div class="cat-name">Jujutsu Kaisen</div><div class="cat-count">48 Episodes</div>
     </a>
     <a href="genres.html?g=Comedy" class="category-card cat-poke">
       <div class="cat-img-wrap">
-        <img src="https://cdn.myanimelist.net/images/anime/1/47225.jpg" alt="Pokemon" loading="lazy" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<span class=cat-fb-emoji>⚡</span>')">
+        <img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx527-fzFbcT2O1OjM.jpg" alt="Pokemon" loading="lazy" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<span class=cat-fb-emoji>⚡</span>')">
       </div>
       <div class="cat-name">Pokemon</div><div class="cat-count">1198 Episodes</div>
     </a>
     <a href="genres.html?g=Superhero" class="category-card cat-marvel">
       <div class="cat-img-wrap">
-        <img src="https://cdn.myanimelist.net/images/anime/1764/126627.jpg" alt="Marvel Anime" loading="lazy" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<span class=cat-fb-emoji>🕷️</span>')">
+        <img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx11061-EiC0ZSbExhVF.jpg" alt="Marvel Anime" loading="lazy" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<span class=cat-fb-emoji>🕷️</span>')">
       </div>
       <div class="cat-name">Marvel Anime</div><div class="cat-count">52 Episodes</div>
     </a>
     <a href="genres.html?g=Adventure" class="category-card cat-classic">
       <div class="cat-img-wrap">
-        <img src="https://cdn.myanimelist.net/images/anime/10/47347.jpg" alt="Cartoon Classics" loading="lazy" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<span class=cat-fb-emoji>🎬</span>')">
+        <img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx16498-Uwth4UtnLkBn.jpg" alt="Cartoon Classics" loading="lazy" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<span class=cat-fb-emoji>🎬</span>')">
       </div>
       <div class="cat-name">Cartoon Classics</div><div class="cat-count">300+ Series</div>
     </a>
@@ -336,7 +336,13 @@ document.getElementById('moviesRow').innerHTML = getMovies().map(a=>renderAnimeC
 // ===== TRENDING GRID =====
 document.getElementById('trendingGrid').innerHTML = getTrending().map((a,i) => `
   <a href="detail.html?id=${a.id}" class="trend-card">
-    <div class="trend-bg" style="background:${a.bg}">${a.emoji}</div>
+    <div class="trend-bg" style="background:${a.bg}">
+      ${a.thumb ? `<img src="${a.thumb}" alt="${a.title}" loading="lazy" decoding="async"
+        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .45s ease;"
+        onerror="this.style.display='none'"
+        class="trend-thumb-img">` : ''}
+      <span style="font-size:72px;position:relative;z-index:0;${a.thumb?'display:none':''}">${a.emoji}</span>
+    </div>
     <div class="trend-overlay"></div>
     <div class="rating-badge-abs">★ ${a.rating}</div>
     <div class="trend-content">
