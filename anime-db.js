@@ -442,7 +442,11 @@ function renderAnimeCard(a, linkPrefix='') {
   return `
   <a href="${linkPrefix}detail.html?id=${a.id}" class="anime-card">
     <div class="card-thumb" style="background:${a.bg}">
-      <span>${a.emoji}</span>
+      ${a.thumb
+        ? `<img src="${a.thumb}" alt="${a.title}" loading="lazy" decoding="async" class="card-thumb-img"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+           <span class="card-thumb-fallback" style="display:none">${a.emoji}</span>`
+        : `<span>${a.emoji}</span>`}
       <div class="card-overlay"><div class="play-btn-overlay">▶</div></div>
     </div>
     <span class="quality-badge ${isHD?'hd':''}">${q}</span>
