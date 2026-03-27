@@ -8,6 +8,7 @@ const ANIME_DB = [
     title: "Jujutsu Kaisen",
     altTitle: "Jujutsu Kaisen Season 3",
     emoji: "👁️",
+    thumb: "https://cdn.myanimelist.net/images/anime/1171/109222.jpg",
     bg: "linear-gradient(135deg,#0a0015,#4a0080,#1a0030)",
     rating: 9.4,
     year: 2024,
@@ -36,6 +37,7 @@ const ANIME_DB = [
     title: "One Piece",
     altTitle: "One Piece — Egghead Arc",
     emoji: "⚓",
+    thumb: "https://cdn.myanimelist.net/images/anime/6/73245.jpg",
     bg: "linear-gradient(135deg,#001a00,#003a00,#001500)",
     rating: 9.1, year: 1999, totalEpisodes: 1085, currentEp: 1085,
     runtime: "24 min", status: "Ongoing", type: "TV Series",
@@ -53,6 +55,7 @@ const ANIME_DB = [
     title: "Bleach: TYBW",
     altTitle: "Bleach: Thousand Year Blood War",
     emoji: "🌊",
+    thumb: "https://cdn.myanimelist.net/images/anime/1764/126627.jpg",
     bg: "linear-gradient(135deg,#001a3a,#003080,#000a20)",
     rating: 9.6, year: 2023, totalEpisodes: 20, currentEp: 14,
     runtime: "24 min", status: "Ongoing", type: "TV Series",
@@ -70,6 +73,7 @@ const ANIME_DB = [
     title: "Demon Slayer S4",
     altTitle: "Demon Slayer: Hashira Training Arc",
     emoji: "⚔️",
+    thumb: "https://cdn.myanimelist.net/images/anime/1431/141618.jpg",
     bg: "linear-gradient(135deg,#1a0000,#3a0000,#200000)",
     rating: 9.2, year: 2024, totalEpisodes: 8, currentEp: 8,
     runtime: "24 min", status: "Completed", type: "TV Series",
@@ -87,6 +91,7 @@ const ANIME_DB = [
     title: "Chainsaw Man",
     altTitle: "Chainsaw Man Season 1",
     emoji: "⚡",
+    thumb: "https://cdn.myanimelist.net/images/anime/1806/126216.jpg",
     bg: "linear-gradient(135deg,#150020,#2a0040,#100015)",
     rating: 8.9, year: 2022, totalEpisodes: 12, currentEp: 12,
     runtime: "24 min", status: "Completed", type: "TV Series",
@@ -104,6 +109,7 @@ const ANIME_DB = [
     title: "Hunter x Hunter",
     altTitle: "Hunter x Hunter (2011)",
     emoji: "🎯",
+    thumb: "https://cdn.myanimelist.net/images/anime/11/33657.jpg",
     bg: "linear-gradient(135deg,#0a1500,#1a2800,#0a1000)",
     rating: 9.0, year: 2011, totalEpisodes: 148, currentEp: 148,
     runtime: "23 min", status: "Completed", type: "TV Series",
@@ -121,6 +127,7 @@ const ANIME_DB = [
     title: "Attack on Titan",
     altTitle: "Attack on Titan: Final Season",
     emoji: "🏰",
+    thumb: "https://cdn.myanimelist.net/images/anime/10/47347.jpg",
     bg: "linear-gradient(135deg,#1a0a00,#3a1500,#1a0500)",
     rating: 9.8, year: 2013, totalEpisodes: 87, currentEp: 87,
     runtime: "24 min", status: "Completed", type: "TV Series",
@@ -138,6 +145,7 @@ const ANIME_DB = [
     title: "Naruto",
     altTitle: "Naruto — Complete Series",
     emoji: "🍃",
+    thumb: "https://cdn.myanimelist.net/images/anime/13/17405.jpg",
     bg: "linear-gradient(135deg,#1a0800,#3a1500,#1a0a00)",
     rating: 8.9, year: 2002, totalEpisodes: 220, currentEp: 220,
     runtime: "23 min", status: "Completed", type: "TV Series",
@@ -155,6 +163,7 @@ const ANIME_DB = [
     title: "Dragon Ball Z",
     altTitle: "Dragon Ball Z — Complete",
     emoji: "⚡",
+    thumb: "https://cdn.myanimelist.net/images/anime/1277/142014.jpg",
     bg: "linear-gradient(135deg,#1a1000,#3a2000,#1a1500)",
     rating: 8.7, year: 1989, totalEpisodes: 291, currentEp: 291,
     runtime: "23 min", status: "Completed", type: "TV Series",
@@ -172,6 +181,7 @@ const ANIME_DB = [
     title: "Spy x Family",
     altTitle: "Spy x Family Season 2",
     emoji: "🕵️",
+    thumb: "https://cdn.myanimelist.net/images/anime/1441/122795.jpg",
     bg: "linear-gradient(135deg,#0a0a20,#1a1a40,#0a1530)",
     rating: 8.8, year: 2023, totalEpisodes: 13, currentEp: 13,
     runtime: "24 min", status: "Completed", type: "TV Series",
@@ -189,6 +199,7 @@ const ANIME_DB = [
     title: "My Hero Academia S7",
     altTitle: "My Hero Academia Season 7",
     emoji: "🦸",
+    thumb: "https://cdn.myanimelist.net/images/anime/1639/122795.jpg",
     bg: "linear-gradient(135deg,#001020,#002040,#001530)",
     rating: 8.6, year: 2024, totalEpisodes: 21, currentEp: 21,
     runtime: "24 min", status: "Completed", type: "TV Series",
@@ -206,6 +217,7 @@ const ANIME_DB = [
     title: "Vinland Saga S2",
     altTitle: "Vinland Saga Season 2",
     emoji: "⚓",
+    thumb: "https://cdn.myanimelist.net/images/anime/1170/124312.jpg",
     bg: "linear-gradient(135deg,#0a1520,#152030,#0a1520)",
     rating: 9.3, year: 2023, totalEpisodes: 24, currentEp: 24,
     runtime: "24 min", status: "Completed", type: "TV Series",
@@ -224,6 +236,7 @@ const ANIME_DB = [
     title: "Jujutsu Kaisen 0",
     altTitle: "Jujutsu Kaisen 0: The Movie",
     emoji: "👁️",
+    thumb: "https://cdn.myanimelist.net/images/anime/1121/119044.jpg",
     bg: "linear-gradient(135deg,#0a0015,#3a0060,#1a0025)",
     rating: 9.0, year: 2021, totalEpisodes: 1, currentEp: 1,
     runtime: "1h 45min", status: "Completed", type: "Movie",
@@ -241,6 +254,7 @@ const ANIME_DB = [
     title: "Demon Slayer: Mugen Train",
     altTitle: "Demon Slayer the Movie: Mugen Train",
     emoji: "🚂",
+    thumb: "https://cdn.myanimelist.net/images/anime/1704/106947.jpg",
     bg: "linear-gradient(135deg,#1a0000,#3a0010,#200005)",
     rating: 8.9, year: 2020, totalEpisodes: 1, currentEp: 1,
     runtime: "1h 57min", status: "Completed", type: "Movie",
@@ -258,6 +272,7 @@ const ANIME_DB = [
     title: "Dragon Ball Super: Broly",
     altTitle: "Dragon Ball Super: Broly Movie",
     emoji: "💥",
+    thumb: "https://cdn.myanimelist.net/images/anime/1505/93662.jpg",
     bg: "linear-gradient(135deg,#1a1000,#3a2500,#1a1200)",
     rating: 8.4, year: 2018, totalEpisodes: 1, currentEp: 1,
     runtime: "1h 41min", status: "Completed", type: "Movie",
@@ -443,10 +458,16 @@ function renderAnimeCard(a, linkPrefix='') {
   <a href="${linkPrefix}detail.html?id=${a.id}" class="anime-card">
     <div class="card-thumb" style="background:${a.bg}">
       ${a.thumb
-        ? `<img src="${a.thumb}" alt="${a.title}" loading="lazy" decoding="async" class="card-thumb-img"
-             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-           <span class="card-thumb-fallback" style="display:none">${a.emoji}</span>`
-        : `<span>${a.emoji}</span>`}
+        ? `<img
+            src="${a.thumb}"
+            alt="${a.title}"
+            loading="lazy"
+            decoding="async"
+            class="card-thumb-img"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+           /><span class="card-thumb-fallback">${a.emoji}</span>`
+        : `<span class="card-thumb-fallback" style="display:flex">${a.emoji}</span>`
+      }
       <div class="card-overlay"><div class="play-btn-overlay">▶</div></div>
     </div>
     <span class="quality-badge ${isHD?'hd':''}">${q}</span>
