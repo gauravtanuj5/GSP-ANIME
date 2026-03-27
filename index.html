@@ -49,7 +49,25 @@
 .category-card::before{content:'';position:absolute;inset:0;background:var(--card-grad,linear-gradient(135deg,rgba(255,229,0,.05),rgba(0,245,255,.05)));opacity:0;transition:opacity .3s;}
 .category-card:hover::before{opacity:1;}
 .category-card:hover{border-color:var(--card-accent,var(--neon-cyan));transform:translateY(-4px);box-shadow:0 8px 32px rgba(0,0,0,.4),0 0 20px var(--card-glow,rgba(0,245,255,.2));}
-.cat-emoji{font-size:34px;margin-bottom:10px;display:block;}
+.cat-img-wrap{
+  width:80px;height:80px;
+  border-radius:12px;
+  overflow:hidden;
+  margin:0 auto 12px;
+  border:2px solid var(--card-accent,rgba(255,255,255,.1));
+  box-shadow:0 0 12px var(--card-glow,rgba(0,0,0,.3));
+  transition:box-shadow .3s;
+  position:relative;
+}
+.cat-img-wrap img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:top center;
+  display:block;
+  transition:transform .4s ease;
+}
+.category-card:hover .cat-img-wrap img{transform:scale(1.1);}
+.category-card:hover .cat-img-wrap{box-shadow:0 0 20px var(--card-glow,rgba(0,245,255,.3));}
+.cat-fb-emoji{font-size:32px;display:flex;align-items:center;justify-content:center;width:100%;height:100%;}
 .cat-name{font-family:var(--font-heading);font-weight:700;font-size:14px;color:var(--text-primary);}
 .cat-count{font-size:11px;color:var(--text-muted);margin-top:4px;}
 .cat-naruto{--card-accent:#FF6B00;--card-glow:rgba(255,107,0,.2);--card-grad:linear-gradient(135deg,rgba(255,107,0,.08),transparent);}
@@ -118,14 +136,54 @@
     <a href="genres.html" class="section-link">All Genres →</a>
   </div>
   <div class="categories-grid">
-    <a href="genres.html?g=Shonen" class="category-card cat-naruto"><span class="cat-emoji">🍃</span><div class="cat-name">Naruto</div><div class="cat-count">720 Episodes</div></a>
-    <a href="genres.html?g=Action" class="category-card cat-dbz"><span class="cat-emoji">💥</span><div class="cat-name">Dragon Ball</div><div class="cat-count">508 Episodes</div></a>
-    <a href="anime-list.html" class="category-card cat-op"><span class="cat-emoji">⚓</span><div class="cat-name">One Piece</div><div class="cat-count">1085 Episodes</div></a>
-    <a href="genres.html?g=Dark Fantasy" class="category-card cat-jjk"><span class="cat-emoji">👁️</span><div class="cat-name">Jujutsu Kaisen</div><div class="cat-count">48 Episodes</div></a>
-    <a href="genres.html?g=Comedy" class="category-card cat-poke"><span class="cat-emoji">⚡</span><div class="cat-name">Pokemon</div><div class="cat-count">1198 Episodes</div></a>
-    <a href="genres.html?g=Superhero" class="category-card cat-marvel"><span class="cat-emoji">🕷️</span><div class="cat-name">Marvel Anime</div><div class="cat-count">52 Episodes</div></a>
-    <a href="genres.html?g=Adventure" class="category-card cat-classic"><span class="cat-emoji">🎬</span><div class="cat-name">Cartoon Classics</div><div class="cat-count">300+ Series</div></a>
-    <a href="anime-list.html" class="category-card"><span class="cat-emoji">🔥</span><div class="cat-name">All Anime</div><div class="cat-count">850+ Series</div></a>
+    <a href="genres.html?g=Shonen" class="category-card cat-naruto">
+      <div class="cat-img-wrap">
+        <img src="https://cdn.myanimelist.net/images/anime/13/17405.jpg" alt="Naruto" loading="lazy" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<span class=cat-fb-emoji>🍃</span>')">
+      </div>
+      <div class="cat-name">Naruto</div><div class="cat-count">720 Episodes</div>
+    </a>
+    <a href="genres.html?g=Action" class="category-card cat-dbz">
+      <div class="cat-img-wrap">
+        <img src="https://cdn.myanimelist.net/images/anime/1277/142014.jpg" alt="Dragon Ball Z" loading="lazy" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<span class=cat-fb-emoji>💥</span>')">
+      </div>
+      <div class="cat-name">Dragon Ball</div><div class="cat-count">508 Episodes</div>
+    </a>
+    <a href="anime-list.html" class="category-card cat-op">
+      <div class="cat-img-wrap">
+        <img src="https://cdn.myanimelist.net/images/anime/6/73245.jpg" alt="One Piece" loading="lazy" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<span class=cat-fb-emoji>⚓</span>')">
+      </div>
+      <div class="cat-name">One Piece</div><div class="cat-count">1085 Episodes</div>
+    </a>
+    <a href="genres.html?g=Dark Fantasy" class="category-card cat-jjk">
+      <div class="cat-img-wrap">
+        <img src="https://cdn.myanimelist.net/images/anime/1171/109222.jpg" alt="Jujutsu Kaisen" loading="lazy" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<span class=cat-fb-emoji>👁️</span>')">
+      </div>
+      <div class="cat-name">Jujutsu Kaisen</div><div class="cat-count">48 Episodes</div>
+    </a>
+    <a href="genres.html?g=Comedy" class="category-card cat-poke">
+      <div class="cat-img-wrap">
+        <img src="https://cdn.myanimelist.net/images/anime/1/47225.jpg" alt="Pokemon" loading="lazy" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<span class=cat-fb-emoji>⚡</span>')">
+      </div>
+      <div class="cat-name">Pokemon</div><div class="cat-count">1198 Episodes</div>
+    </a>
+    <a href="genres.html?g=Superhero" class="category-card cat-marvel">
+      <div class="cat-img-wrap">
+        <img src="https://cdn.myanimelist.net/images/anime/1764/126627.jpg" alt="Marvel Anime" loading="lazy" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<span class=cat-fb-emoji>🕷️</span>')">
+      </div>
+      <div class="cat-name">Marvel Anime</div><div class="cat-count">52 Episodes</div>
+    </a>
+    <a href="genres.html?g=Adventure" class="category-card cat-classic">
+      <div class="cat-img-wrap">
+        <img src="https://cdn.myanimelist.net/images/anime/10/47347.jpg" alt="Cartoon Classics" loading="lazy" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<span class=cat-fb-emoji>🎬</span>')">
+      </div>
+      <div class="cat-name">Cartoon Classics</div><div class="cat-count">300+ Series</div>
+    </a>
+    <a href="anime-list.html" class="category-card">
+      <div class="cat-img-wrap" style="background:linear-gradient(135deg,rgba(255,229,0,.15),rgba(0,245,255,.15));display:flex;align-items:center;justify-content:center;">
+        <span style="font-size:32px">🔥</span>
+      </div>
+      <div class="cat-name">All Anime</div><div class="cat-count">850+ Series</div>
+    </a>
   </div>
 </section>
 
