@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAGE_TITLE – GSP ANIME</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="scanlines"></div>
+<div id="navbar-mount"></div>
+<div class="page-wrap">
+  <div class="page-hero"><div class="cyber-grid-bg"></div>
+    <div class="page-hero-title" id="heroTitle"></div>
+    <div class="page-hero-sub" id="heroSub"></div>
+  </div>
+  <section>
+    <div class="filters-wrap" id="filtersWrap"></div>
+    <div class="anime-grid" id="mainGrid"></div>
+    <div class="no-results" id="noResults" style="display:none;text-align:center;padding:60px;color:var(--text-muted);font-family:var(--font-heading);">
+      <div style="font-size:48px;margin-bottom:16px;">😔</div>
+      <p>No anime found</p>
+    </div>
+  </section>
+</div>
+<div id="footer-mount"></div>
+<script src="anime-db.js"></script>
+<script>
+const PAGE = 'movies';
+document.getElementById('navbar-mount').innerHTML = renderNavbar(PAGE+'.html');
+document.getElementById('footer-mount').innerHTML = renderFooter();
+initShared();
+
+const cfg = {
+  movies:{title:'🎬 Anime Movies',sub:'Stream full anime movies in HD',getData:getMovies,filters:false},
+  dubbed:{title:'🎤 Hindi / English Dubbed Anime',sub:'Watch your favourite anime in your language',getData:getDubbed,filters:true},
+  subbed:{title:'📺 Subbed Anime',sub:'Original Japanese audio with subtitles',getData:getSubbed,filters:true},
+};
+const c = cfg[PAGE];
+document.title = c.title.replace(/[^a-zA-Z ]/g,'').trim() + ' – GSP ANIME';
+document.getElementById('heroTitle').innerHTML = c.title;
+document.getElementById('heroSub').textContent = c.sub;
+
+if(c.filters) {
+  document.getElementById('filtersWrap').innerHTML = `
+    <button class="filter-btn active" data-ff="all">All</button>
+    <button class="filter-btn" data-ff="action">Action</button>
+    <button class="filter-btn" data-ff="fantasy">Fantasy</button>
+    <button class="filter-btn" data-ff="shonen">Shonen</button>
+    <button class="filter-btn" data-ff="1080p">1080p</button>
+  `;
+}
+
+function showList(list) {
+  const g = document.getElementById('mainGrid');
+  if(!list.length){g.style.display='none';document.getElementById('noResults').style.display='block';return;}
+  g.style.display='grid';document.getElementById('noResults').style.display='none';
+  g.innerHTML = list.map(a=>renderAnimeCard(a)).join('');
+}
+
+showList(c.getData());
+
+document.querySelectorAll('.filter-btn[data-ff]').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.filter-btn[data-ff]').forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+    const f=this.dataset.ff, base=c.getData();
+    const map={action:a=>a.genres.includes('Action'),fantasy:a=>a.genres.some(g=>g.includes('Fantasy')),shonen:a=>a.genres.includes('Shonen'),'1080p':a=>a.quality.includes('1080p')};
+    showList(f==='all'?base:base.filter(map[f]||_=>true));
+  });
+});
+</script>
+</body>
+</html>

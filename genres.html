@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Genres – GSP ANIME</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.genres-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-bottom:48px;}
+.genre-card{background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:var(--radius-lg);padding:20px;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;}
+.genre-card::before{content:'';position:absolute;inset:0;background:var(--gc-grad);opacity:0;transition:opacity .3s;}
+.genre-card:hover::before{opacity:1;}
+.genre-card:hover{border-color:var(--gc-color);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.4),0 0 16px var(--gc-glow);}
+.gc-name{font-family:var(--font-display);font-size:15px;font-weight:700;margin-bottom:6px;color:var(--gc-color, var(--text-primary));}
+.gc-count{font-size:12px;color:var(--text-muted);}
+.gc-emoji{font-size:28px;margin-bottom:10px;display:block;}
+</style>
+</head>
+<body>
+<div class="scanlines"></div>
+<div id="navbar-mount"></div>
+<div class="page-wrap">
+  <div class="page-hero">
+    <div class="cyber-grid-bg"></div>
+    <div class="page-hero-title">Genres</div>
+    <div class="page-hero-sub">Explore anime by your favourite genre</div>
+  </div>
+  <section>
+    <div id="selectedGenreSection" style="display:none;margin-bottom:40px;">
+      <div class="section-header">
+        <h2 class="section-title" id="selectedGenreTitle"></h2>
+        <button class="section-link" onclick="clearGenre()">✕ Clear</button>
+      </div>
+      <div class="anime-grid" id="genreAnimeGrid"></div>
+    </div>
+    <div class="section-header"><h2 class="section-title">All Genres</h2></div>
+    <div class="genres-grid" id="genresGrid"></div>
+  </section>
+</div>
+<div id="footer-mount"></div>
+<script src="anime-db.js"></script>
+<script>
+document.getElementById('navbar-mount').innerHTML = renderNavbar('genres.html');
+document.getElementById('footer-mount').innerHTML = renderFooter();
+initShared();
+
+const genreData = [
+  {name:'Action',emoji:'⚔️',color:'#FF4444',glow:'rgba(255,68,68,.2)',grad:'linear-gradient(135deg,rgba(255,68,68,.08),transparent)'},
+  {name:'Adventure',emoji:'🗺️',color:'#FF8C00',glow:'rgba(255,140,0,.2)',grad:'linear-gradient(135deg,rgba(255,140,0,.08),transparent)'},
+  {name:'Comedy',emoji:'😂',color:'#FFE500',glow:'rgba(255,229,0,.2)',grad:'linear-gradient(135deg,rgba(255,229,0,.08),transparent)'},
+  {name:'Dark Fantasy',emoji:'🌑',color:'#8A2BE2',glow:'rgba(138,43,226,.2)',grad:'linear-gradient(135deg,rgba(138,43,226,.08),transparent)'},
+  {name:'Drama',emoji:'🎭',color:'#00BFFF',glow:'rgba(0,191,255,.2)',grad:'linear-gradient(135deg,rgba(0,191,255,.08),transparent)'},
+  {name:'Fantasy',emoji:'✨',color:'#00F5FF',glow:'rgba(0,245,255,.2)',grad:'linear-gradient(135deg,rgba(0,245,255,.08),transparent)'},
+  {name:'Historical',emoji:'📜',color:'#DAA520',glow:'rgba(218,165,32,.2)',grad:'linear-gradient(135deg,rgba(218,165,32,.08),transparent)'},
+  {name:'Horror',emoji:'👻',color:'#FF2D6B',glow:'rgba(255,45,107,.2)',grad:'linear-gradient(135deg,rgba(255,45,107,.08),transparent)'},
+  {name:'Military',emoji:'🎖️',color:'#556B2F',glow:'rgba(85,107,47,.2)',grad:'linear-gradient(135deg,rgba(85,107,47,.08),transparent)'},
+  {name:'Romance',emoji:'💕',color:'#FF69B4',glow:'rgba(255,105,180,.2)',grad:'linear-gradient(135deg,rgba(255,105,180,.08),transparent)'},
+  {name:'Sci-Fi',emoji:'🚀',color:'#00F5FF',glow:'rgba(0,245,255,.2)',grad:'linear-gradient(135deg,rgba(0,245,255,.08),transparent)'},
+  {name:'Shonen',emoji:'💪',color:'#FF6B00',glow:'rgba(255,107,0,.2)',grad:'linear-gradient(135deg,rgba(255,107,0,.08),transparent)'},
+  {name:'Slice of Life',emoji:'☕',color:'#90EE90',glow:'rgba(144,238,144,.2)',grad:'linear-gradient(135deg,rgba(144,238,144,.08),transparent)'},
+  {name:'Superhero',emoji:'🦸',color:'#1E90FF',glow:'rgba(30,144,255,.2)',grad:'linear-gradient(135deg,rgba(30,144,255,.08),transparent)'},
+  {name:'Supernatural',emoji:'🌀',color:'#9400D3',glow:'rgba(148,0,211,.2)',grad:'linear-gradient(135deg,rgba(148,0,211,.08),transparent)'},
+];
+
+document.getElementById('genresGrid').innerHTML = genreData.map(g => {
+  const count = ANIME_DB.filter(a=>a.genres.includes(g.name)).length;
+  return `<div class="genre-card" style="--gc-color:${g.color};--gc-glow:${g.glow};--gc-grad:${g.grad};" onclick="selectGenre('${g.name}')">
+    <span class="gc-emoji">${g.emoji}</span>
+    <div class="gc-name">${g.name}</div>
+    <div class="gc-count">${count} series in database</div>
+  </div>`;
+}).join('');
+
+function selectGenre(name) {
+  const list = ANIME_DB.filter(a=>a.genres.includes(name));
+  document.getElementById('selectedGenreTitle').textContent = name;
+  document.getElementById('genreAnimeGrid').innerHTML = list.length
+    ? list.map(a=>renderAnimeCard(a)).join('')
+    : '<p style="color:var(--text-muted);font-family:var(--font-heading)">More titles coming soon...</p>';
+  document.getElementById('selectedGenreSection').style.display='block';
+  document.querySelector('.section-header').scrollIntoView({behavior:'smooth'});
+}
+
+function clearGenre() {
+  document.getElementById('selectedGenreSection').style.display='none';
+}
+
+// Check URL param
+const gParam = new URLSearchParams(location.search).get('g');
+if(gParam) selectGenre(gParam);
+</script>
+</body>
+</html>

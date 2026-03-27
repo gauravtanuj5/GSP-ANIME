@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">Anime Detail – GSP ANIME</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.detail-hero{position:relative;min-height:360px;display:flex;align-items:flex-end;overflow:hidden;}
+.detail-hero-bg{position:absolute;inset:0;background-size:cover;}
+.detail-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,var(--bg-black) 0%,rgba(6,6,8,.6) 60%,transparent 100%),linear-gradient(90deg,var(--bg-black) 0%,transparent 60%);}
+.detail-content-wrap{position:relative;z-index:2;display:grid;grid-template-columns:220px 1fr;gap:40px;padding:0 40px 48px;width:100%;}
+.poster-wrap{flex-shrink:0;}
+.poster-card{background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:var(--radius-lg);overflow:hidden;backdrop-filter:blur(10px);}
+.poster-img{width:100%;aspect-ratio:2/3;display:flex;align-items:center;justify-content:center;font-size:72px;position:relative;}
+.poster-status{background:var(--neon-yellow);color:#000;font-family:var(--font-display);font-size:10px;font-weight:700;padding:6px;text-align:center;letter-spacing:1px;}
+.detail-info{padding:20px 0;}
+.detail-genre-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+.detail-title{font-family:var(--font-display);font-size:clamp(22px,3.5vw,40px);font-weight:900;line-height:1.15;margin-bottom:10px;background:linear-gradient(135deg,#fff,var(--neon-cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.detail-meta-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;margin-bottom:20px;}
+.meta-item{background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:8px;padding:8px 12px;}
+.meta-label{font-size:9px;letter-spacing:1px;color:var(--text-muted);font-family:var(--font-heading);text-transform:uppercase;margin-bottom:3px;}
+.meta-val{font-family:var(--font-heading);font-weight:700;font-size:13px;}
+.meta-val.rating-val{color:var(--neon-yellow);}
+.detail-synopsis{font-size:14px;line-height:1.8;color:rgba(255,255,255,.65);margin-bottom:24px;}
+.action-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px;align-items:center;}
+.dl-dropdown{position:relative;display:inline-block;}
+.dl-menu{position:absolute;top:calc(100% + 6px);left:0;background:var(--bg-dark);border:1px solid var(--border-glass);border-radius:10px;overflow:hidden;z-index:50;min-width:180px;display:none;}
+.dl-dropdown:hover .dl-menu,.dl-dropdown.open .dl-menu{display:block;}
+.dl-item{padding:10px 16px;font-family:var(--font-heading);font-weight:600;font-size:13px;color:var(--text-primary);cursor:pointer;transition:background .15s;display:flex;align-items:center;gap:8px;}
+.dl-item:hover{background:rgba(255,45,107,.08);color:var(--neon-pink);}
+/* Episode list */
+.ep-section{padding:40px;}
+.ep-list-wrap{background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:var(--radius-lg);overflow:hidden;}
+.ep-list-header{padding:16px 20px;border-bottom:1px solid var(--border-glass);display:flex;align-items:center;justify-content:space-between;}
+.ep-list-title{font-family:var(--font-display);font-size:14px;font-weight:700;}
+.ep-count-badge{background:rgba(0,245,255,.1);border:1px solid rgba(0,245,255,.2);color:var(--neon-cyan);font-family:var(--font-heading);font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;}
+.ep-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:8px;padding:16px;}
+.ep-pill{background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:6px;padding:8px 10px;font-family:var(--font-heading);font-size:12px;font-weight:600;color:var(--text-muted);cursor:pointer;transition:all .2s;text-align:center;}
+.ep-pill:hover,.ep-pill.active{border-color:var(--neon-yellow);color:var(--neon-yellow);background:rgba(255,229,0,.08);box-shadow:0 0 10px rgba(255,229,0,.2);}
+/* Related section */
+.related-section{padding:0 40px 56px;}
+.related-row{display:flex;gap:16px;overflow-x:auto;scrollbar-width:none;padding-bottom:8px;}
+.related-row::-webkit-scrollbar{display:none;}
+@media(max-width:768px){.detail-content-wrap{grid-template-columns:1fr;padding:0 20px 40px;}.poster-wrap{max-width:200px;}.ep-section{padding:28px 20px;}.related-section{padding:0 20px 40px;}}
+</style>
+</head>
+<body>
+<div class="scanlines"></div>
+<div id="navbar-mount"></div>
+<div class="page-wrap" id="detailWrap"></div>
+<div id="footer-mount"></div>
+
+<script src="anime-db.js"></script>
+<script>
+document.getElementById('navbar-mount').innerHTML = renderNavbar('detail.html');
+document.getElementById('footer-mount').innerHTML = renderFooter();
+initShared();
+
+const params = new URLSearchParams(location.search);
+const anime = getAnimeById(params.get('id')) || ANIME_DB[0];
+document.getElementById('pageTitle').textContent = `${anime.title} – GSP ANIME`;
+
+const wrap = document.getElementById('detailWrap');
+wrap.innerHTML = `
+  <!-- HERO BANNER -->
+  <div class="detail-hero">
+    <div class="detail-hero-bg" style="background:${anime.bg}"></div>
+    <div class="cyber-grid-bg" style="opacity:.2;"></div>
+    <div class="detail-hero-overlay"></div>
+    <div class="detail-content-wrap">
+      <div class="poster-wrap">
+        <div class="poster-card">
+          <div class="poster-img" style="background:${anime.bg}">${anime.emoji}</div>
+          <div class="poster-status">${anime.status.toUpperCase()}</div>
+        </div>
+      </div>
+      <div class="detail-info">
+        <div class="detail-genre-row">
+          ${anime.genres.map(g=>`<span class="genre-chip">${g}</span>`).join('')}
+          ${anime.isMovie?'<span class="genre-chip" style="border-color:var(--neon-yellow);color:var(--neon-yellow)">Movie</span>':''}
+        </div>
+        <h1 class="detail-title">${anime.title}</h1>
+        <div class="detail-meta-grid">
+          <div class="meta-item"><div class="meta-label">Rating</div><div class="meta-val rating-val">★ ${anime.rating}/10</div></div>
+          <div class="meta-item"><div class="meta-label">Year</div><div class="meta-val">${anime.year}</div></div>
+          <div class="meta-item"><div class="meta-label">Episodes</div><div class="meta-val">${anime.totalEpisodes}</div></div>
+          <div class="meta-item"><div class="meta-label">Runtime</div><div class="meta-val">${anime.runtime}</div></div>
+          <div class="meta-item"><div class="meta-label">Status</div><div class="meta-val" style="color:${anime.status==='Ongoing'?'var(--neon-green)':'var(--text-primary)'}">${anime.status}</div></div>
+          <div class="meta-item"><div class="meta-label">Language</div><div class="meta-val">${anime.language.join(' / ')}</div></div>
+          <div class="meta-item"><div class="meta-label">Quality</div><div class="meta-val">${anime.quality[0]}</div></div>
+          <div class="meta-item"><div class="meta-label">Studio</div><div class="meta-val">${anime.studio}</div></div>
+        </div>
+        <p class="detail-synopsis">${anime.synopsis}</p>
+        <div class="action-row">
+          <a href="player.html?id=${anime.id}&ep=1" class="btn-watch">▶ Watch Now</a>
+          ${anime.servers.map((s,i)=>`<button class="btn-server${i===0?' active':''}" onclick="document.querySelectorAll('.btn-server').forEach(b=>b.classList.remove('active'));this.classList.add('active')">🖥 ${s.name.split('·')[0]}</button>`).join('')}
+          <div class="dl-dropdown">
+            <button class="btn-dl">⬇ Download ▾</button>
+            <div class="dl-menu">
+              ${anime.downloads.map(d=>`<div class="dl-item">📥 ${d}</div>`).join('')}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EPISODE LIST -->
+  <div class="ep-section">
+    <div class="ep-list-wrap">
+      <div class="ep-list-header">
+        <div class="ep-list-title">📋 Episode List</div>
+        <span class="ep-count-badge">${anime.episodes.length} Episodes</span>
+      </div>
+      <div class="ep-grid" id="epGrid"></div>
+    </div>
+  </div>
+
+  <!-- RELATED -->
+  <div class="related-section">
+    <div class="section-header"><h2 class="section-title">Related Anime</h2><a href="anime-list.html" class="section-link">Browse All →</a></div>
+    <div class="related-row" id="relatedRow"></div>
+  </div>
+`;
+
+// Episode pills
+const epGrid = document.getElementById('epGrid');
+anime.episodes.forEach((ep,i) => {
+  const btn = document.createElement('a');
+  btn.href = `player.html?id=${anime.id}&ep=${ep.ep}`;
+  btn.className = `ep-pill${i===0?' active':''}`;
+  btn.textContent = `EP ${ep.ep}`;
+  btn.addEventListener('click', e => {
+    document.querySelectorAll('.ep-pill').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+  });
+  epGrid.appendChild(btn);
+});
+
+// Related anime
+const related = ANIME_DB.filter(a=>a.id!==anime.id && a.genres.some(g=>anime.genres.includes(g))).slice(0,8);
+document.getElementById('relatedRow').innerHTML = related.map(a=>renderAnimeCard(a)).join('');
+</script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact – GSP ANIME</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:40px;max-width:1000px;margin:0 auto;}
+.contact-form-card{background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:var(--radius-lg);padding:36px;backdrop-filter:blur(10px);}
+.form-title{font-family:var(--font-display);font-size:20px;font-weight:700;margin-bottom:24px;background:linear-gradient(135deg,#fff,var(--neon-cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.form-group{margin-bottom:18px;}
+.form-group label{display:block;font-family:var(--font-heading);font-size:12px;font-weight:700;color:var(--neon-yellow);letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px;}
+.form-input,.form-textarea,.form-select{width:100%;background:rgba(0,0,0,.3);border:1px solid var(--border-glass);border-radius:8px;padding:11px 14px;color:var(--text-primary);font-family:var(--font-body);font-size:13px;outline:none;transition:border-color .2s;}
+.form-input:focus,.form-textarea:focus,.form-select:focus{border-color:var(--neon-cyan);box-shadow:0 0 0 2px rgba(0,245,255,.1);}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--text-muted);}
+.form-textarea{resize:vertical;min-height:120px;}
+.form-select option{background:var(--bg-dark);}
+.submit-btn{width:100%;background:linear-gradient(135deg,var(--neon-cyan),#0080FF);color:#000;border:none;border-radius:8px;padding:13px;font-family:var(--font-heading);font-weight:700;font-size:15px;cursor:pointer;transition:all .2s;box-shadow:0 4px 20px rgba(0,245,255,.25);margin-top:4px;}
+.submit-btn:hover{transform:translateY(-2px);box-shadow:var(--glow-cyan);}
+.success-msg{display:none;background:rgba(0,255,136,.08);border:1px solid rgba(0,255,136,.3);border-radius:var(--radius);padding:16px;text-align:center;font-family:var(--font-heading);font-size:14px;color:#00FF88;margin-top:16px;}
+/* Info side */
+.info-side{}
+.info-card{background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:var(--radius-lg);padding:24px;margin-bottom:16px;}
+.info-card h3{font-family:var(--font-heading);font-weight:700;font-size:15px;color:var(--neon-yellow);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.info-card p,.info-card a{font-size:13px;color:rgba(255,255,255,.65);line-height:1.7;}
+.info-card a{color:var(--neon-cyan);}
+.info-card a:hover{color:#fff;}
+.faq-item{border-bottom:1px solid var(--border-glass);padding:14px 0;}
+.faq-item:last-child{border:none;}
+.faq-q{font-family:var(--font-heading);font-weight:700;font-size:13px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:color .2s;}
+.faq-q:hover{color:var(--neon-cyan);}
+.faq-a{font-size:12px;color:rgba(255,255,255,.55);line-height:1.7;margin-top:8px;display:none;}
+.faq-item.open .faq-a{display:block;}
+.faq-item.open .faq-q{color:var(--neon-cyan);}
+@media(max-width:768px){.contact-layout{grid-template-columns:1fr;}.contact-form-card{padding:24px;}}
+</style>
+</head>
+<body>
+<div class="scanlines"></div>
+<div id="navbar-mount"></div>
+<div class="page-wrap">
+  <div class="page-hero" style="padding:40px;"><div class="cyber-grid-bg"></div>
+    <div class="page-hero-title">Contact Us</div>
+    <div class="page-hero-sub">Questions, anime requests, bug reports — we're here to help</div>
+  </div>
+  <section>
+    <div class="contact-layout">
+      <div class="contact-form-card">
+        <div class="form-title">Send a Message</div>
+        <form id="contactForm" onsubmit="return submitForm(event)">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input class="form-input" type="text" placeholder="Naruto Uzumaki" required>
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input class="form-input" type="email" placeholder="you@email.com" required>
+          </div>
+          <div class="form-group">
+            <label>Subject</label>
+            <select class="form-select">
+              <option>General Enquiry</option>
+              <option>Anime Request</option>
+              <option>Report Broken Link</option>
+              <option>DMCA / Copyright</option>
+              <option>Bug Report</option>
+              <option>Partnership / Advertising</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea class="form-textarea" placeholder="Describe your issue or request in detail…" required></textarea>
+          </div>
+          <button type="submit" class="submit-btn">⚡ Send Message</button>
+        </form>
+        <div class="success-msg" id="successMsg">✅ Message sent! We'll get back to you within 24 hours.</div>
+      </div>
+
+      <div class="info-side">
+        <div class="info-card">
+          <h3>📬 Contact Details</h3>
+          <p>Email: <a href="mailto:contact@gspanime.com">contact@gspanime.com</a><br>
+          DMCA: <a href="mailto:dmca@gspanime.com">dmca@gspanime.com</a><br>
+          Ads & Partnerships: <a href="mailto:ads@gspanime.com">ads@gspanime.com</a><br><br>
+          We respond to emails within 24–48 business hours.</p>
+        </div>
+        <div class="info-card">
+          <h3>💬 Community</h3>
+          <p>For quick support, join our community:<br><br>
+          <a href="#">📱 Telegram: t.me/gspanime</a><br>
+          <a href="#">🎮 Discord: discord.gg/gspanime</a><br>
+          <a href="#">🐦 Twitter/X: @gspanime</a></p>
+        </div>
+        <div class="info-card">
+          <h3>❓ Frequently Asked Questions</h3>
+          <div class="faq-item">
+            <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How do I request an anime? <span>+</span></div>
+            <div class="faq-a">Use the contact form above with subject "Anime Request" and include the anime name, year, and whether you want Sub or Dub.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Why is a video not playing? <span>+</span></div>
+            <div class="faq-a">Try switching to a different server using the server buttons below the player. If all servers fail, please report the issue.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Is GSP ANIME free? <span>+</span></div>
+            <div class="faq-a">Yes, GSP ANIME is completely free to use. No registration or subscription required.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How often are episodes updated? <span>+</span></div>
+            <div class="faq-a">We aim to index new episodes within hours of their official release. Ongoing series are updated weekly.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<div id="footer-mount"></div>
+<script src="anime-db.js"></script>
+<script>
+document.getElementById('navbar-mount').innerHTML = renderNavbar('contact.html');
+document.getElementById('footer-mount').innerHTML = renderFooter();
+initShared();
+function submitForm(e){
+  e.preventDefault();
+  document.getElementById('successMsg').style.display='block';
+  e.target.reset();
+  return false;
+}
+</script>
+</body>
+</html>

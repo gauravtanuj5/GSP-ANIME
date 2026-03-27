@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anime List – GSP ANIME</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.list-layout{display:grid;grid-template-columns:240px 1fr;gap:32px;}
+.sidebar{position:sticky;top:90px;align-self:start;}
+.sidebar-card{background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:16px;}
+.sidebar-card-title{padding:12px 16px;border-bottom:1px solid var(--border-glass);font-family:var(--font-heading);font-weight:700;font-size:13px;letter-spacing:.5px;text-transform:uppercase;color:var(--neon-yellow);}
+.sidebar-links{padding:8px 0;}
+.sidebar-link{display:flex;align-items:center;justify-content:space-between;padding:8px 16px;font-family:var(--font-heading);font-size:13px;font-weight:600;color:var(--text-muted);cursor:pointer;transition:all .15s;text-decoration:none;}
+.sidebar-link:hover,.sidebar-link.active{color:var(--neon-cyan);background:rgba(0,245,255,.05);}
+.sidebar-link .count{font-size:10px;background:var(--bg-glass);border:1px solid var(--border-glass);padding:2px 7px;border-radius:10px;}
+.results-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px;}
+.results-count{font-family:var(--font-heading);font-size:13px;color:var(--text-muted);}
+.results-count span{color:var(--neon-cyan);font-weight:700;}
+.sort-select{background:var(--bg-glass);border:1px solid var(--border-glass);color:var(--text-primary);border-radius:8px;padding:6px 12px;font-family:var(--font-heading);font-size:12px;outline:none;cursor:pointer;}
+.sort-select option{background:var(--bg-dark);}
+.no-results{text-align:center;padding:60px 20px;color:var(--text-muted);}
+.no-results .icon{font-size:48px;margin-bottom:16px;}
+.no-results p{font-family:var(--font-heading);font-size:16px;}
+@media(max-width:1024px){.list-layout{grid-template-columns:1fr;}.sidebar{position:static;display:flex;gap:12px;flex-wrap:wrap;}.sidebar-card{flex:1;min-width:200px;}}
+</style>
+</head>
+<body>
+<div class="scanlines"></div>
+<div id="navbar-mount"></div>
+<div class="page-wrap">
+  <div class="page-hero">
+    <div class="cyber-grid-bg"></div>
+    <div class="page-hero-title">Anime List</div>
+    <div class="page-hero-sub">Browse all 850+ anime series — filter by genre, language, quality & status</div>
+  </div>
+
+  <section>
+    <div class="filters-wrap">
+      <input class="search-input" type="text" id="localSearch" placeholder="Search in list…" style="width:220px;border-radius:8px;">
+      <select class="filter-select" id="genreFilter">
+        <option value="">All Genres</option>
+        <option>Action</option><option>Adventure</option><option>Comedy</option>
+        <option>Dark Fantasy</option><option>Drama</option><option>Fantasy</option>
+        <option>Historical</option><option>Horror</option><option>Military</option>
+        <option>Romance</option><option>Sci-Fi</option><option>Shonen</option>
+        <option>Slice of Life</option><option>Superhero</option><option>Supernatural</option>
+      </select>
+      <select class="filter-select" id="langFilter">
+        <option value="">All Languages</option>
+        <option value="Sub">Subbed</option>
+        <option value="Dub">Dubbed</option>
+      </select>
+      <select class="filter-select" id="qualityFilter">
+        <option value="">All Quality</option>
+        <option value="1080p">1080p</option>
+        <option value="720p">720p</option>
+        <option value="480p">480p</option>
+      </select>
+      <select class="filter-select" id="statusFilter">
+        <option value="">All Status</option>
+        <option value="Ongoing">Ongoing</option>
+        <option value="Completed">Completed</option>
+      </select>
+      <select class="filter-select" id="typeFilter">
+        <option value="">All Types</option>
+        <option value="series">TV Series</option>
+        <option value="movie">Movies</option>
+      </select>
+      <button class="filter-btn" id="clearFilters">✕ Clear</button>
+    </div>
+
+    <div class="list-layout">
+      <div class="sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Quick Filter</div>
+          <div class="sidebar-links">
+            <a class="sidebar-link active" data-qf="all">All Anime <span class="count">14</span></a>
+            <a class="sidebar-link" data-qf="ongoing">Ongoing <span class="count">5</span></a>
+            <a class="sidebar-link" data-qf="completed">Completed <span class="count">9</span></a>
+            <a class="sidebar-link" data-qf="dub">Dubbed <span class="count">13</span></a>
+            <a class="sidebar-link" data-qf="sub">Subbed <span class="count">14</span></a>
+            <a class="sidebar-link" data-qf="1080p">1080p HD <span class="count">10</span></a>
+            <a class="sidebar-link" data-qf="movie">Movies <span class="count">3</span></a>
+          </div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Top Genres</div>
+          <div class="sidebar-links" id="genreLinks"></div>
+        </div>
+        <div class="ad-side" style="margin-top:0;">📢 Ad Slot<br>160×600</div>
+      </div>
+
+      <div>
+        <div class="results-header">
+          <div class="results-count">Showing <span id="resultCount">0</span> anime</div>
+          <select class="sort-select" id="sortSelect">
+            <option value="title">Sort: A–Z</option>
+            <option value="rating">Sort: Rating</option>
+            <option value="year">Sort: Newest</option>
+            <option value="episodes">Sort: Most Episodes</option>
+          </select>
+        </div>
+        <div class="anime-grid" id="animeGrid"></div>
+        <div class="no-results" id="noResults" style="display:none;">
+          <div class="icon">🔍</div>
+          <p>No anime found matching your filters.</p>
+        </div>
+        <div class="pagination" id="pagination"></div>
+      </div>
+    </div>
+  </section>
+</div>
+<div id="footer-mount"></div>
+
+<script src="anime-db.js"></script>
+<script>
+document.getElementById('navbar-mount').innerHTML = renderNavbar('anime-list.html');
+document.getElementById('footer-mount').innerHTML = renderFooter();
+initShared();
+
+const PAGE_SIZE = 12;
+let currentPage = 1;
+let filtered = [...ANIME_DB];
+
+// Handle URL params
+const urlP = new URLSearchParams(location.search);
+if(urlP.get('q')) { document.getElementById('localSearch').value = urlP.get('q'); }
+if(urlP.get('lang')) { document.getElementById('langFilter').value = urlP.get('lang'); }
+if(urlP.get('type')) { document.getElementById('typeFilter').value = urlP.get('type'); }
+
+function applyFilters() {
+  const q = document.getElementById('localSearch').value.toLowerCase();
+  const genre = document.getElementById('genreFilter').value;
+  const lang = document.getElementById('langFilter').value;
+  const quality = document.getElementById('qualityFilter').value;
+  const status = document.getElementById('statusFilter').value;
+  const type = document.getElementById('typeFilter').value;
+  const sort = document.getElementById('sortSelect').value;
+
+  filtered = ANIME_DB.filter(a => {
+    if(q && !a.title.toLowerCase().includes(q) && !a.genres.some(g=>g.toLowerCase().includes(q))) return false;
+    if(genre && !a.genres.includes(genre)) return false;
+    if(lang && !a.language.includes(lang)) return false;
+    if(quality && !a.quality.includes(quality)) return false;
+    if(status && a.status !== status) return false;
+    if(type === 'movie' && !a.isMovie) return false;
+    if(type === 'series' && a.isMovie) return false;
+    return true;
+  });
+
+  if(sort==='rating') filtered.sort((a,b)=>b.rating-a.rating);
+  else if(sort==='year') filtered.sort((a,b)=>b.year-a.year);
+  else if(sort==='episodes') filtered.sort((a,b)=>b.totalEpisodes-a.totalEpisodes);
+  else filtered.sort((a,b)=>a.title.localeCompare(b.title));
+
+  currentPage = 1;
+  render();
+}
+
+function render() {
+  const grid = document.getElementById('animeGrid');
+  const start = (currentPage-1)*PAGE_SIZE;
+  const page = filtered.slice(start, start+PAGE_SIZE);
+
+  document.getElementById('resultCount').textContent = filtered.length;
+  document.getElementById('noResults').style.display = filtered.length ? 'none' : 'block';
+  grid.style.display = filtered.length ? 'grid' : 'none';
+
+  grid.innerHTML = page.map(a => renderAnimeCard(a)).join('');
+
+  // Pagination
+  const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
+  const pg = document.getElementById('pagination');
+  if(totalPages <= 1) { pg.innerHTML=''; return; }
+  let html = '';
+  if(currentPage>1) html += `<button class="page-btn" onclick="goPage(${currentPage-1})">◀</button>`;
+  for(let i=Math.max(1,currentPage-2); i<=Math.min(totalPages,currentPage+2); i++)
+    html += `<button class="page-btn${i===currentPage?' active':''}" onclick="goPage(${i})">${i}</button>`;
+  if(currentPage<totalPages) html += `<button class="page-btn" onclick="goPage(${currentPage+1})">▶</button>`;
+  pg.innerHTML = html;
+}
+
+function goPage(p) { currentPage=p; render(); window.scrollTo(0,300); }
+
+// Genre links in sidebar
+const genres = [...new Set(ANIME_DB.flatMap(a=>a.genres))].sort();
+document.getElementById('genreLinks').innerHTML = genres.map(g=>
+  `<a class="sidebar-link" onclick="document.getElementById('genreFilter').value='${g}';applyFilters()">${g} <span class="count">${ANIME_DB.filter(a=>a.genres.includes(g)).length}</span></a>`
+).join('');
+
+// Quick filter sidebar
+document.querySelectorAll('[data-qf]').forEach(el => {
+  el.addEventListener('click', function() {
+    document.querySelectorAll('[data-qf]').forEach(e=>e.classList.remove('active'));
+    this.classList.add('active');
+    const qf = this.dataset.qf;
+    document.getElementById('langFilter').value='';
+    document.getElementById('typeFilter').value='';
+    document.getElementById('statusFilter').value='';
+    if(qf==='dub') document.getElementById('langFilter').value='Dub';
+    else if(qf==='sub') document.getElementById('langFilter').value='Sub';
+    else if(qf==='movie') document.getElementById('typeFilter').value='movie';
+    else if(qf==='ongoing') document.getElementById('statusFilter').value='Ongoing';
+    else if(qf==='completed') document.getElementById('statusFilter').value='Completed';
+    if(qf==='1080p') document.getElementById('qualityFilter').value='1080p';
+    else document.getElementById('qualityFilter').value='';
+    applyFilters();
+  });
+});
+
+document.getElementById('clearFilters').addEventListener('click', () => {
+  ['genreFilter','langFilter','qualityFilter','statusFilter','typeFilter'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('localSearch').value='';
+  document.querySelectorAll('[data-qf]').forEach(e=>e.classList.remove('active'));
+  document.querySelector('[data-qf="all"]').classList.add('active');
+  applyFilters();
+});
+
+['localSearch','genreFilter','langFilter','qualityFilter','statusFilter','typeFilter','sortSelect'].forEach(id => {
+  document.getElementById(id).addEventListener('change', applyFilters);
+  if(id==='localSearch') document.getElementById(id).addEventListener('input', applyFilters);
+});
+
+applyFilters();
+</script>
+</body>
+</html>
