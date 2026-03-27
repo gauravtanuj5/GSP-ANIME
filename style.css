@@ -1,480 +1,193 @@
-// ============================================
-// GSP ANIME — ANIME DATABASE (anime-db.js)
-// ============================================
+/* ============================================
+   GSP ANIME — SHARED STYLESHEET
+   ============================================ */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;600;700&display=swap');
 
-const ANIME_DB = [
-  {
-    id: 1, slug: "jujutsu-kaisen",
-    title: "Jujutsu Kaisen",
-    altTitle: "Jujutsu Kaisen Season 3",
-    emoji: "👁️",
-    thumb: "https://cdn.myanimelist.net/images/anime/1171/109222.jpg",
-    bg: "linear-gradient(135deg,#0a0015,#4a0080,#1a0030)",
-    rating: 9.4,
-    year: 2024,
-    totalEpisodes: 24,
-    currentEp: 24,
-    runtime: "24 min",
-    status: "Ongoing",
-    type: "TV Series",
-    language: ["Sub","Dub"],
-    quality: ["1080p","720p"],
-    genres: ["Action","Dark Fantasy","Supernatural","Shonen"],
-    studio: "MAPPA",
-    synopsis: "Following the Shibuya Incident, Yuji Itadori faces the deadly Culling Game — a battle royale across cursed barriers. With Gojo Satoru sealed, the surviving sorcerers must rise against an unprecedented threat. The thin line between life and death blurs as cursed energy tears through the world.",
-    poster: "👁️",
-    trending: true, featured: true, popular: true,
-    servers: [
-      { name: "Server 1 · Vidstream", url: "about:blank" },
-      { name: "Server 2 · Streamtape", url: "about:blank" },
-      { name: "Server 3 · Doodstream", url: "about:blank" }
-    ],
-    downloads: ["720p MP4","1080p MP4","720p MKV"],
-    episodes: Array.from({length:24},(_,i)=>({ep:i+1,title:`Episode ${i+1}`,duration:"24:00"}))
-  },
-  {
-    id: 2, slug: "one-piece",
-    title: "One Piece",
-    altTitle: "One Piece — Egghead Arc",
-    emoji: "⚓",
-    thumb: "https://cdn.myanimelist.net/images/anime/6/73245.jpg",
-    bg: "linear-gradient(135deg,#001a00,#003a00,#001500)",
-    rating: 9.1, year: 1999, totalEpisodes: 1085, currentEp: 1085,
-    runtime: "24 min", status: "Ongoing", type: "TV Series",
-    language: ["Sub","Dub"], quality: ["1080p","720p","480p"],
-    genres: ["Adventure","Comedy","Fantasy","Shonen"],
-    studio: "Toei Animation",
-    synopsis: "Monkey D. Luffy and the Straw Hats reach Egghead Island, home of genius scientist Dr. Vegapunk. As the world government closes in and ancient secrets unravel, an era-defining confrontation begins. The quest for the One Piece enters its final chapter.",
-    poster: "⚓", trending: true, featured: true, popular: true,
-    servers:[{name:"Server 1 · Vidstream",url:"about:blank"},{name:"Server 2 · Streamtape",url:"about:blank"}],
-    downloads: ["720p MP4","1080p MP4"],
-    episodes: Array.from({length:20},(_,i)=>({ep:1066+i,title:`Episode ${1066+i}`,duration:"24:00"}))
-  },
-  {
-    id: 3, slug: "bleach-tybw",
-    title: "Bleach: TYBW",
-    altTitle: "Bleach: Thousand Year Blood War",
-    emoji: "🌊",
-    thumb: "https://cdn.myanimelist.net/images/anime/1764/126627.jpg",
-    bg: "linear-gradient(135deg,#001a3a,#003080,#000a20)",
-    rating: 9.6, year: 2023, totalEpisodes: 20, currentEp: 14,
-    runtime: "24 min", status: "Ongoing", type: "TV Series",
-    language: ["Sub","Dub"], quality: ["1080p","720p"],
-    genres: ["Action","Supernatural","Shonen"],
-    studio: "Pierrot",
-    synopsis: "Ichigo Kurosaki faces the Quincy army of the Wandenreich as they declare war on Soul Society. With captains falling and Bankai being stolen, this final arc delivers the most intense battles in the series — animated in stunning new detail.",
-    poster: "🌊", trending: true, featured: false, popular: true,
-    servers:[{name:"Server 1 · Vidstream",url:"about:blank"},{name:"Server 2 · Streamtape",url:"about:blank"}],
-    downloads:["720p MP4","1080p MP4"],
-    episodes:Array.from({length:14},(_,i)=>({ep:i+1,title:`Episode ${i+1}`,duration:"24:00"}))
-  },
-  {
-    id: 4, slug: "demon-slayer-s4",
-    title: "Demon Slayer S4",
-    altTitle: "Demon Slayer: Hashira Training Arc",
-    emoji: "⚔️",
-    thumb: "https://cdn.myanimelist.net/images/anime/1431/141618.jpg",
-    bg: "linear-gradient(135deg,#1a0000,#3a0000,#200000)",
-    rating: 9.2, year: 2024, totalEpisodes: 8, currentEp: 8,
-    runtime: "24 min", status: "Completed", type: "TV Series",
-    language: ["Sub","Dub"], quality: ["1080p","720p"],
-    genres: ["Action","Supernatural","Dark Fantasy"],
-    studio: "ufotable",
-    synopsis: "Tanjiro and the Demon Slayers undergo intense Hashira training to prepare for the final battle against Muzan. Each Hashira pushes them to their absolute limits. The fate of humanity hangs in the balance.",
-    poster: "⚔️", trending: false, featured: false, popular: true,
-    servers:[{name:"Server 1 · Vidstream",url:"about:blank"}],
-    downloads:["720p MP4","1080p MP4"],
-    episodes:Array.from({length:8},(_,i)=>({ep:i+1,title:`Episode ${i+1}`,duration:"24:00"}))
-  },
-  {
-    id: 5, slug: "chainsaw-man",
-    title: "Chainsaw Man",
-    altTitle: "Chainsaw Man Season 1",
-    emoji: "⚡",
-    thumb: "https://cdn.myanimelist.net/images/anime/1806/126216.jpg",
-    bg: "linear-gradient(135deg,#150020,#2a0040,#100015)",
-    rating: 8.9, year: 2022, totalEpisodes: 12, currentEp: 12,
-    runtime: "24 min", status: "Completed", type: "TV Series",
-    language: ["Sub","Dub"], quality: ["1080p","720p"],
-    genres: ["Action","Gore","Dark Fantasy","Horror"],
-    studio: "MAPPA",
-    synopsis: "Denji merges with his devil dog Pochita to become Chainsaw Man — a Public Safety Devil Hunter. Surviving in a brutal world of contracts and carnage, he discovers something more terrifying than any devil: human desire.",
-    poster: "⚡", trending: true, featured: false, popular: true,
-    servers:[{name:"Server 1 · Vidstream",url:"about:blank"},{name:"Server 2 · Streamtape",url:"about:blank"}],
-    downloads:["720p MP4","1080p MP4"],
-    episodes:Array.from({length:12},(_,i)=>({ep:i+1,title:`Episode ${i+1}`,duration:"24:00"}))
-  },
-  {
-    id: 6, slug: "hunter-x-hunter",
-    title: "Hunter x Hunter",
-    altTitle: "Hunter x Hunter (2011)",
-    emoji: "🎯",
-    thumb: "https://cdn.myanimelist.net/images/anime/11/33657.jpg",
-    bg: "linear-gradient(135deg,#0a1500,#1a2800,#0a1000)",
-    rating: 9.0, year: 2011, totalEpisodes: 148, currentEp: 148,
-    runtime: "23 min", status: "Completed", type: "TV Series",
-    language: ["Sub","Dub"], quality: ["1080p","720p","480p"],
-    genres: ["Adventure","Action","Shonen","Fantasy"],
-    studio: "Madhouse",
-    synopsis: "Young Gon Freecs embarks on a journey to find his missing father — a legendary Hunter. Along the way he meets Killua, Kurapika, and Leorio, facing dangerous trials in the Hunter Exam and beyond.",
-    poster: "🎯", trending: false, featured: false, popular: true,
-    servers:[{name:"Server 1 · Vidstream",url:"about:blank"},{name:"Server 2",url:"about:blank"}],
-    downloads:["720p MP4","480p MP4"],
-    episodes:Array.from({length:20},(_,i)=>({ep:i+1,title:`Episode ${i+1}`,duration:"23:00"}))
-  },
-  {
-    id: 7, slug: "attack-on-titan",
-    title: "Attack on Titan",
-    altTitle: "Attack on Titan: Final Season",
-    emoji: "🏰",
-    thumb: "https://cdn.myanimelist.net/images/anime/10/47347.jpg",
-    bg: "linear-gradient(135deg,#1a0a00,#3a1500,#1a0500)",
-    rating: 9.8, year: 2013, totalEpisodes: 87, currentEp: 87,
-    runtime: "24 min", status: "Completed", type: "TV Series",
-    language: ["Sub","Dub"], quality: ["1080p","720p"],
-    genres: ["Action","Dark Fantasy","Military","Horror"],
-    studio: "MAPPA / WIT Studio",
-    synopsis: "In a world where humanity lives behind walls to survive titan attacks, Eren Yeager vows to exterminate every titan after his mother is devoured. The truth of their world is far darker than anyone imagined.",
-    poster: "🏰", trending: false, featured: true, popular: true,
-    servers:[{name:"Server 1 · Vidstream",url:"about:blank"},{name:"Server 2",url:"about:blank"}],
-    downloads:["720p MP4","1080p MP4"],
-    episodes:Array.from({length:20},(_,i)=>({ep:i+1,title:`Episode ${i+1}`,duration:"24:00"}))
-  },
-  {
-    id: 8, slug: "naruto",
-    title: "Naruto",
-    altTitle: "Naruto — Complete Series",
-    emoji: "🍃",
-    thumb: "https://cdn.myanimelist.net/images/anime/13/17405.jpg",
-    bg: "linear-gradient(135deg,#1a0800,#3a1500,#1a0a00)",
-    rating: 8.9, year: 2002, totalEpisodes: 220, currentEp: 220,
-    runtime: "23 min", status: "Completed", type: "TV Series",
-    language: ["Sub","Dub"], quality: ["1080p","720p","480p"],
-    genres: ["Action","Adventure","Shonen","Comedy"],
-    studio: "Pierrot",
-    synopsis: "Naruto Uzumaki — a hyperactive ninja with a fox demon sealed inside him — dreams of becoming Hokage, the greatest ninja of his village. A classic tale of friendship, perseverance, and the price of power.",
-    poster: "🍃", trending: false, featured: false, popular: true,
-    servers:[{name:"Server 1 · Vidstream",url:"about:blank"},{name:"Server 2",url:"about:blank"}],
-    downloads:["720p MP4","480p MP4"],
-    episodes:Array.from({length:20},(_,i)=>({ep:i+1,title:`Episode ${i+1}`,duration:"23:00"}))
-  },
-  {
-    id: 9, slug: "dragon-ball-z",
-    title: "Dragon Ball Z",
-    altTitle: "Dragon Ball Z — Complete",
-    emoji: "⚡",
-    thumb: "https://cdn.myanimelist.net/images/anime/1277/142014.jpg",
-    bg: "linear-gradient(135deg,#1a1000,#3a2000,#1a1500)",
-    rating: 8.7, year: 1989, totalEpisodes: 291, currentEp: 291,
-    runtime: "23 min", status: "Completed", type: "TV Series",
-    language: ["Sub","Dub"], quality: ["720p","480p"],
-    genres: ["Action","Adventure","Shonen","Comedy"],
-    studio: "Toei Animation",
-    synopsis: "Goku and friends defend Earth from increasingly powerful alien threats, from the Saiyan saga through Cell and Buu. The benchmark of anime battle series — where power levels became legendary.",
-    poster: "⚡", trending: false, featured: false, popular: true,
-    servers:[{name:"Server 1 · Vidstream",url:"about:blank"}],
-    downloads:["720p MP4","480p MP4"],
-    episodes:Array.from({length:20},(_,i)=>({ep:i+1,title:`Episode ${i+1}`,duration:"23:00"}))
-  },
-  {
-    id: 10, slug: "spy-x-family",
-    title: "Spy x Family",
-    altTitle: "Spy x Family Season 2",
-    emoji: "🕵️",
-    thumb: "https://cdn.myanimelist.net/images/anime/1441/122795.jpg",
-    bg: "linear-gradient(135deg,#0a0a20,#1a1a40,#0a1530)",
-    rating: 8.8, year: 2023, totalEpisodes: 13, currentEp: 13,
-    runtime: "24 min", status: "Completed", type: "TV Series",
-    language: ["Sub","Dub"], quality: ["1080p","720p"],
-    genres: ["Comedy","Action","Slice of Life","Family"],
-    studio: "WIT Studio / CloverWorks",
-    synopsis: "Spy Loid Forger must maintain his fake family — telepath daughter Anya and assassin wife Yor — while completing Operation Strix. A hilarious and heartwarming family comedy wrapped in a spy thriller.",
-    poster: "🕵️", trending: true, featured: false, popular: true,
-    servers:[{name:"Server 1 · Vidstream",url:"about:blank"},{name:"Server 2",url:"about:blank"}],
-    downloads:["720p MP4","1080p MP4"],
-    episodes:Array.from({length:13},(_,i)=>({ep:i+1,title:`Episode ${i+1}`,duration:"24:00"}))
-  },
-  {
-    id: 11, slug: "my-hero-academia-s7",
-    title: "My Hero Academia S7",
-    altTitle: "My Hero Academia Season 7",
-    emoji: "🦸",
-    thumb: "https://cdn.myanimelist.net/images/anime/1639/122795.jpg",
-    bg: "linear-gradient(135deg,#001020,#002040,#001530)",
-    rating: 8.6, year: 2024, totalEpisodes: 21, currentEp: 21,
-    runtime: "24 min", status: "Completed", type: "TV Series",
-    language: ["Sub","Dub"], quality: ["1080p","720p"],
-    genres: ["Action","Superhero","Shonen"],
-    studio: "Bones",
-    synopsis: "The final war arc concludes as Deku and Class 1-A face All For One and Shigaraki in an all-out battle for the future of hero society. The series reaches its emotional climax.",
-    poster: "🦸", trending: false, featured: false, popular: true,
-    servers:[{name:"Server 1 · Vidstream",url:"about:blank"}],
-    downloads:["720p MP4","1080p MP4"],
-    episodes:Array.from({length:21},(_,i)=>({ep:i+1,title:`Episode ${i+1}`,duration:"24:00"}))
-  },
-  {
-    id: 12, slug: "vinland-saga-s2",
-    title: "Vinland Saga S2",
-    altTitle: "Vinland Saga Season 2",
-    emoji: "⚓",
-    thumb: "https://cdn.myanimelist.net/images/anime/1170/124312.jpg",
-    bg: "linear-gradient(135deg,#0a1520,#152030,#0a1520)",
-    rating: 9.3, year: 2023, totalEpisodes: 24, currentEp: 24,
-    runtime: "24 min", status: "Completed", type: "TV Series",
-    language: ["Sub","Dub"], quality: ["1080p","720p"],
-    genres: ["Historical","Action","Drama","Adventure"],
-    studio: "MAPPA",
-    synopsis: "Thorfinn, once a warrior consumed by revenge, now seeks a land of peace — Vinland. Trapped as a slave on a farm, his philosophy is tested as violence follows him across the world. A masterpiece of mature storytelling.",
-    poster: "⚓", trending: false, featured: false, popular: false,
-    servers:[{name:"Server 1 · Vidstream",url:"about:blank"},{name:"Server 2",url:"about:blank"}],
-    downloads:["720p MP4","1080p MP4"],
-    episodes:Array.from({length:24},(_,i)=>({ep:i+1,title:`Episode ${i+1}`,duration:"24:00"}))
-  },
-  // MOVIES
-  {
-    id: 101, slug: "jujutsu-kaisen-0",
-    title: "Jujutsu Kaisen 0",
-    altTitle: "Jujutsu Kaisen 0: The Movie",
-    emoji: "👁️",
-    thumb: "https://cdn.myanimelist.net/images/anime/1121/119044.jpg",
-    bg: "linear-gradient(135deg,#0a0015,#3a0060,#1a0025)",
-    rating: 9.0, year: 2021, totalEpisodes: 1, currentEp: 1,
-    runtime: "1h 45min", status: "Completed", type: "Movie",
-    language: ["Sub","Dub"], quality: ["1080p","720p"],
-    genres: ["Action","Dark Fantasy","Supernatural"],
-    studio: "MAPPA",
-    synopsis: "Yuta Okkotsu enrolls in Tokyo Jujutsu High after being haunted by the spirit of his childhood friend Rika. Gojo Satoru sees his potential as the next Special Grade sorcerer. A prequel that expands the JJK universe.",
-    poster: "👁️", trending: false, featured: false, popular: true, isMovie: true,
-    servers:[{name:"Server 1 · Vidstream",url:"about:blank"},{name:"Server 2",url:"about:blank"}],
-    downloads:["720p MP4","1080p MP4"],
-    episodes:[{ep:1,title:"Jujutsu Kaisen 0",duration:"1:45:00"}]
-  },
-  {
-    id: 102, slug: "demon-slayer-mugen",
-    title: "Demon Slayer: Mugen Train",
-    altTitle: "Demon Slayer the Movie: Mugen Train",
-    emoji: "🚂",
-    thumb: "https://cdn.myanimelist.net/images/anime/1704/106947.jpg",
-    bg: "linear-gradient(135deg,#1a0000,#3a0010,#200005)",
-    rating: 8.9, year: 2020, totalEpisodes: 1, currentEp: 1,
-    runtime: "1h 57min", status: "Completed", type: "Movie",
-    language: ["Sub","Dub"], quality: ["1080p","720p"],
-    genres: ["Action","Supernatural","Dark Fantasy"],
-    studio: "ufotable",
-    synopsis: "Tanjiro, Nezuko, Zenitsu, and Inosuke board the Mugen Train alongside Flame Hashira Rengoku. An Upper Moon demon awaits. The highest-grossing anime film of all time.",
-    poster: "🚂", trending: false, featured: false, popular: true, isMovie: true,
-    servers:[{name:"Server 1 · Vidstream",url:"about:blank"}],
-    downloads:["720p MP4","1080p MP4"],
-    episodes:[{ep:1,title:"Demon Slayer: Mugen Train",duration:"1:57:00"}]
-  },
-  {
-    id: 103, slug: "dragon-ball-super-broly",
-    title: "Dragon Ball Super: Broly",
-    altTitle: "Dragon Ball Super: Broly Movie",
-    emoji: "💥",
-    thumb: "https://cdn.myanimelist.net/images/anime/1505/93662.jpg",
-    bg: "linear-gradient(135deg,#1a1000,#3a2500,#1a1200)",
-    rating: 8.4, year: 2018, totalEpisodes: 1, currentEp: 1,
-    runtime: "1h 41min", status: "Completed", type: "Movie",
-    language: ["Sub","Dub"], quality: ["1080p","720p"],
-    genres: ["Action","Adventure","Shonen"],
-    studio: "Toei Animation",
-    synopsis: "Goku and Vegeta encounter Broly, the Legendary Super Saiyan, in the most visually spectacular Dragon Ball fight ever animated. An origin story decades in the making.",
-    poster: "💥", trending: false, featured: false, popular: false, isMovie: true,
-    servers:[{name:"Server 1 · Vidstream",url:"about:blank"}],
-    downloads:["720p MP4","1080p MP4"],
-    episodes:[{ep:1,title:"Dragon Ball Super: Broly",duration:"1:41:00"}]
-  }
-];
-
-// ============ HELPERS ============
-function getAnimeById(id) { return ANIME_DB.find(a => a.id === +id); }
-function getAnimeBySlug(slug) { return ANIME_DB.find(a => a.slug === slug); }
-function getFeatured() { return ANIME_DB.filter(a => a.featured); }
-function getTrending() { return ANIME_DB.filter(a => a.trending); }
-function getPopular() { return ANIME_DB.filter(a => a.popular); }
-function getMovies() { return ANIME_DB.filter(a => a.isMovie); }
-function getSeries() { return ANIME_DB.filter(a => !a.isMovie); }
-function getDubbed() { return ANIME_DB.filter(a => a.language.includes("Dub")); }
-function getSubbed() { return ANIME_DB.filter(a => a.language.includes("Sub")); }
-function getLatest() { return [...ANIME_DB].sort((a,b) => b.year - a.year).slice(0,12); }
-function searchAnime(q) {
-  const lq = q.toLowerCase();
-  return ANIME_DB.filter(a =>
-    a.title.toLowerCase().includes(lq) ||
-    a.genres.some(g => g.toLowerCase().includes(lq))
-  ).slice(0,8);
+:root {
+  --neon-yellow: #FFE500;
+  --neon-cyan: #00F5FF;
+  --neon-pink: #FF2D6B;
+  --neon-green: #00FF88;
+  --bg-black: #060608;
+  --bg-dark: #0D0D12;
+  --bg-card: #12121A;
+  --bg-glass: rgba(255,255,255,0.04);
+  --border-glass: rgba(255,255,255,0.08);
+  --text-primary: #F0F0FF;
+  --text-muted: #7A7A99;
+  --glow-yellow: 0 0 20px rgba(255,229,0,0.5), 0 0 60px rgba(255,229,0,0.2);
+  --glow-cyan: 0 0 20px rgba(0,245,255,0.5), 0 0 60px rgba(0,245,255,0.2);
+  --glow-pink: 0 0 20px rgba(255,45,107,0.5);
+  --font-display: 'Orbitron', monospace;
+  --font-heading: 'Rajdhani', sans-serif;
+  --font-body: 'Exo 2', sans-serif;
+  --radius: 12px;
+  --radius-lg: 20px;
 }
-function filterAnime({genre, type, lang, quality, status} = {}) {
-  return ANIME_DB.filter(a => {
-    if (genre && !a.genres.some(g => g.toLowerCase() === genre.toLowerCase())) return false;
-    if (type === 'movie' && !a.isMovie) return false;
-    if (type === 'series' && a.isMovie) return false;
-    if (lang && !a.language.includes(lang)) return false;
-    if (quality && !a.quality.includes(quality)) return false;
-    if (status && a.status.toLowerCase() !== status.toLowerCase()) return false;
-    return true;
-  });
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg-black);color:var(--text-primary);font-family:var(--font-body);overflow-x:hidden;}
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--bg-dark);}
+::-webkit-scrollbar-thumb{background:var(--neon-cyan);border-radius:3px;}
+a{color:inherit;text-decoration:none;}
+
+/* SCANLINES */
+.scanlines{position:fixed;inset:0;z-index:9999;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.025) 2px,rgba(0,0,0,0.025) 4px);pointer-events:none;}
+
+/* CYBER GRID */
+.cyber-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(0,245,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,255,0.04) 1px,transparent 1px);background-size:40px 40px;opacity:.5;pointer-events:none;}
+
+/* ============ NAVBAR ============ */
+.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(6,6,8,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-glass);padding:0 24px;height:68px;display:flex;align-items:center;gap:20px;transition:background .3s;}
+.nav-logo{flex-shrink:0;display:flex;align-items:center;gap:10px;}
+.logo-icon{width:40px;height:40px;background:linear-gradient(135deg,var(--neon-yellow),var(--neon-cyan));border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:900;font-size:13px;color:#000;box-shadow:var(--glow-cyan);position:relative;overflow:hidden;}
+.logo-icon::before{content:'';position:absolute;inset:0;background:linear-gradient(45deg,transparent 30%,rgba(255,255,255,.3) 50%,transparent 70%);transform:translateX(-100%);animation:shimmer 3s infinite;}
+@keyframes shimmer{to{transform:translateX(200%);}}
+.logo-text{font-family:var(--font-display);font-weight:900;font-size:18px;background:linear-gradient(90deg,var(--neon-yellow),var(--neon-cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:2px;filter:drop-shadow(0 0 10px rgba(0,245,255,.6));}
+.nav-menu{display:flex;align-items:center;gap:2px;list-style:none;flex:1;overflow-x:auto;scrollbar-width:none;}
+.nav-menu::-webkit-scrollbar{display:none;}
+.nav-menu a{display:block;padding:6px 11px;color:var(--text-muted);font-family:var(--font-heading);font-weight:600;font-size:13px;letter-spacing:.5px;border-radius:6px;transition:all .2s;white-space:nowrap;}
+.nav-menu a:hover,.nav-menu a.active{color:var(--neon-cyan);background:rgba(0,245,255,.08);text-shadow:0 0 12px rgba(0,245,255,.6);}
+.nav-actions{display:flex;align-items:center;gap:10px;flex-shrink:0;position:relative;}
+.search-wrap{position:relative;}
+.search-input{background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:24px;padding:7px 36px 7px 14px;color:var(--text-primary);font-family:var(--font-body);font-size:13px;outline:none;width:200px;transition:all .3s;}
+.search-input:focus{width:260px;border-color:var(--neon-cyan);box-shadow:0 0 0 2px rgba(0,245,255,.15);}
+.search-input::placeholder{color:var(--text-muted);}
+.search-icon{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:14px;pointer-events:none;}
+.search-dropdown{position:absolute;top:calc(100% + 8px);left:0;right:0;background:var(--bg-dark);border:1px solid var(--border-glass);border-radius:12px;overflow:hidden;max-height:320px;overflow-y:auto;z-index:200;display:none;}
+.search-dropdown.show{display:block;}
+.search-item{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;transition:background .15s;}
+.search-item:hover{background:rgba(0,245,255,.06);}
+.search-item-icon{font-size:24px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:var(--bg-card);border-radius:6px;flex-shrink:0;}
+.search-item-info .title{font-family:var(--font-heading);font-weight:700;font-size:13px;}
+.search-item-info .sub{font-size:11px;color:var(--text-muted);}
+.btn-login{background:linear-gradient(135deg,var(--neon-yellow),#FF8C00);color:#000;border:none;border-radius:8px;padding:7px 16px;font-family:var(--font-heading);font-weight:700;font-size:13px;letter-spacing:.5px;cursor:pointer;transition:all .2s;box-shadow:0 0 16px rgba(255,229,0,.3);}
+.btn-login:hover{transform:translateY(-1px);box-shadow:var(--glow-yellow);}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text-primary);border-radius:2px;}
+
+/* ============ LAYOUT ============ */
+.page-wrap{margin-top:68px;min-height:calc(100vh - 68px);}
+section{padding:56px 40px;}
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;}
+.section-title{font-family:var(--font-display);font-size:clamp(16px,2.2vw,24px);font-weight:700;display:flex;align-items:center;gap:12px;}
+.section-title::before{content:'';display:block;width:4px;height:26px;background:linear-gradient(to bottom,var(--neon-yellow),var(--neon-cyan));border-radius:2px;box-shadow:0 0 12px rgba(0,245,255,.5);}
+.section-link{font-family:var(--font-heading);font-weight:600;font-size:13px;color:var(--neon-cyan);border:1px solid rgba(0,245,255,.3);padding:5px 14px;border-radius:20px;transition:all .2s;}
+.section-link:hover{background:rgba(0,245,255,.1);box-shadow:0 0 12px rgba(0,245,255,.3);}
+.neon-divider{height:1px;background:linear-gradient(90deg,transparent,var(--neon-cyan),var(--neon-yellow),transparent);opacity:.2;margin:0;}
+
+/* ============ BUTTONS ============ */
+.btn-watch{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--neon-yellow),#FF8C00);color:#000;border:none;border-radius:8px;padding:12px 28px;font-family:var(--font-heading);font-weight:700;font-size:15px;letter-spacing:.5px;cursor:pointer;transition:all .3s;box-shadow:0 4px 24px rgba(255,229,0,.35);}
+.btn-watch:hover{transform:translateY(-2px) scale(1.02);box-shadow:var(--glow-yellow);}
+.btn-info{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#fff;border-radius:8px;padding:12px 24px;font-family:var(--font-heading);font-weight:600;font-size:15px;cursor:pointer;transition:all .3s;backdrop-filter:blur(8px);}
+.btn-info:hover{border-color:var(--neon-cyan);color:var(--neon-cyan);background:rgba(0,245,255,.08);box-shadow:0 0 20px rgba(0,245,255,.2);}
+.btn-server{background:var(--bg-glass);border:1px solid var(--border-glass);color:var(--text-primary);border-radius:8px;padding:9px 18px;cursor:pointer;font-family:var(--font-heading);font-weight:600;font-size:13px;transition:all .2s;display:inline-flex;align-items:center;gap:6px;}
+.btn-server:hover,.btn-server.active{border-color:var(--neon-cyan);color:var(--neon-cyan);background:rgba(0,245,255,.08);box-shadow:0 0 16px rgba(0,245,255,.2);}
+.btn-dl{background:linear-gradient(135deg,rgba(255,45,107,.15),rgba(255,45,107,.05));border:1px solid rgba(255,45,107,.4);color:var(--neon-pink);border-radius:8px;padding:9px 18px;cursor:pointer;font-family:var(--font-heading);font-weight:600;font-size:13px;transition:all .2s;display:inline-flex;align-items:center;gap:6px;}
+.btn-dl:hover{box-shadow:var(--glow-pink);transform:translateY(-1px);}
+
+/* ============ ANIME CARD ============ */
+.anime-card{flex:0 0 180px;position:relative;border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:transform .3s;display:block;}
+.anime-card:hover{transform:scale(1.05) translateY(-4px);}
+.anime-card:hover .card-overlay{opacity:1;}
+.card-thumb{width:100%;aspect-ratio:2/3;display:flex;align-items:center;justify-content:center;font-size:44px;position:relative;overflow:hidden;}
+.card-thumb::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.8) 0%,transparent 50%);pointer-events:none;z-index:1;}
+
+/* Thumbnail image — fills card, zooms on hover */
+.card-thumb-img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;object-position:top center;
+  display:block;
+  transition:transform .45s ease;
+  z-index:0;
+}
+.anime-card:hover .card-thumb-img{transform:scale(1.08);}
+
+/* Fallback emoji shown when image fails / no thumb */
+.card-thumb-fallback{
+  display:none;
+  align-items:center;justify-content:center;
+  width:100%;height:100%;
+  font-size:52px;
+  position:absolute;inset:0;
+  z-index:0;
 }
 
-// ============ SHARED NAVBAR HTML ============
-function renderNavbar(activePage = '') {
-  const pages = [
-    {href:'index.html',label:'Home'},
-    {href:'anime-list.html',label:'Anime List'},
-    {href:'movies.html',label:'Movies'},
-    {href:'dubbed.html',label:'Dubbed'},
-    {href:'subbed.html',label:'Subbed'},
-    {href:'genres.html',label:'Genres'},
-    {href:'popular.html',label:'Popular'},
-    {href:'latest.html',label:'Latest'},
-    {href:'dmca.html',label:'DMCA'},
-    {href:'contact.html',label:'Contact'},
-  ];
-  return `
-  <nav class="navbar" id="mainNav">
-    <a href="index.html" class="nav-logo">
-      <div class="logo-icon">GSP</div>
-      <span class="logo-text">GSP ANIME</span>
-    </a>
-    <ul class="nav-menu">
-      ${pages.map(p=>`<li><a href="${p.href}" class="${activePage===p.href?'active':''}">${p.label}</a></li>`).join('')}
-    </ul>
-    <div class="nav-actions">
-      <div class="search-wrap">
-        <input class="search-input" type="text" placeholder="Search anime…" id="globalSearch" autocomplete="off">
-        <span class="search-icon">🔍</span>
-        <div class="search-dropdown" id="searchDropdown"></div>
-      </div>
-      <button class="btn-login">⚡ Login</button>
-      <button class="hamburger" aria-label="Menu" onclick="document.querySelector('.nav-menu').style.display=document.querySelector('.nav-menu').style.display==='flex'?'none':'flex'">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>`;
-}
+.card-overlay{position:absolute;inset:0;background:rgba(0,245,255,.1);opacity:0;transition:opacity .3s;display:flex;align-items:center;justify-content:center;z-index:2;}
+.play-btn-overlay{width:50px;height:50px;background:rgba(0,0,0,.7);border:2px solid var(--neon-cyan);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;box-shadow:var(--glow-cyan);}
+.quality-badge{position:absolute;top:8px;right:8px;z-index:3;background:var(--neon-yellow);color:#000;font-family:var(--font-display);font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;}
+.quality-badge.hd{background:var(--neon-cyan);}
+.ep-badge{position:absolute;top:8px;left:8px;z-index:3;background:rgba(0,0,0,.75);border:1px solid rgba(255,255,255,.15);color:#fff;font-size:10px;padding:2px 7px;border-radius:4px;font-family:var(--font-heading);font-weight:600;backdrop-filter:blur(4px);}
+.card-info{padding:10px 8px;background:var(--bg-card);}
+.card-title{font-family:var(--font-heading);font-weight:700;font-size:13px;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:4px;}
+.card-sub{font-size:11px;color:var(--text-muted);display:flex;align-items:center;gap:6px;}
+.star{color:var(--neon-yellow);}
+.scroll-row{display:flex;gap:16px;overflow-x:auto;scrollbar-width:none;padding-bottom:8px;}
+.scroll-row::-webkit-scrollbar{display:none;}
 
-// ============ SHARED FOOTER HTML ============
-function renderFooter() {
-  return `
-  <div class="neon-divider"></div>
-  <footer>
-    <div class="footer-top">
-      <div class="footer-brand">
-        <span class="logo-text">GSP ANIME</span>
-        <p class="footer-desc">GSP ANIME is a free anime streaming platform providing the latest subbed and dubbed episodes, movies, and OVAs. Stream in HD — no subscription required.</p>
-        <div class="social-icons">
-          <a href="#" class="social-btn">✈️</a>
-          <a href="#" class="social-btn">🎮</a>
-          <a href="#" class="social-btn">✖</a>
-          <a href="#" class="social-btn">▶</a>
-          <a href="#" class="social-btn">📸</a>
-        </div>
-      </div>
-      <div class="footer-col"><h4>Quick Links</h4><ul class="footer-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="anime-list.html">Anime List</a></li>
-        <li><a href="movies.html">Movies</a></li>
-        <li><a href="dubbed.html">Dubbed Anime</a></li>
-        <li><a href="subbed.html">Subbed Anime</a></li>
-        <li><a href="latest.html">Latest Episodes</a></li>
-        <li><a href="popular.html">Popular Anime</a></li>
-      </ul></div>
-      <div class="footer-col"><h4>Genres</h4><ul class="footer-links">
-        <li><a href="genres.html#action">Action</a></li>
-        <li><a href="genres.html#romance">Romance</a></li>
-        <li><a href="genres.html#fantasy">Fantasy</a></li>
-        <li><a href="genres.html#scifi">Sci-Fi</a></li>
-        <li><a href="genres.html#horror">Horror</a></li>
-        <li><a href="genres.html#comedy">Comedy</a></li>
-        <li><a href="genres.html#slice">Slice of Life</a></li>
-      </ul></div>
-      <div class="footer-col"><h4>Support</h4><ul class="footer-links">
-        <li><a href="contact.html">Contact Us</a></li>
-        <li><a href="dmca.html">DMCA Notice</a></li>
-        <li><a href="dmca.html">Privacy Policy</a></li>
-        <li><a href="dmca.html">Terms of Service</a></li>
-        <li><a href="contact.html">Request Anime</a></li>
-        <li><a href="contact.html">Report Issue</a></li>
-      </ul></div>
-    </div>
-    <div class="footer-disclaimer"><strong>⚠️ Disclaimer:</strong> GSP ANIME does not store any files on its servers. All content is embedded from third-party streaming hosts indexed from publicly available sources. For DMCA requests visit our <a href="dmca.html" style="color:var(--neon-yellow)">DMCA page</a>.</div>
-    <div class="footer-bottom">
-      <div class="footer-copy">© 2024–2025 <span>GSP ANIME</span> · All Rights Reserved · Made with ⚡ for Anime Fans</div>
-      <div style="display:flex;gap:16px;font-size:12px;color:var(--text-muted);">
-        <a href="dmca.html" style="color:var(--text-muted)">Privacy</a>
-        <a href="dmca.html" style="color:var(--text-muted)">Terms</a>
-        <a href="dmca.html" style="color:var(--text-muted)">DMCA</a>
-        <a href="contact.html" style="color:var(--text-muted)">Contact</a>
-      </div>
-    </div>
-  </footer>`;
-}
+/* ============ GENRE CHIP ============ */
+.genre-chip{font-family:var(--font-heading);font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;border:1px solid rgba(0,245,255,.3);color:var(--neon-cyan);background:rgba(0,245,255,.06);}
+.tag{font-size:10px;font-family:var(--font-heading);font-weight:600;padding:2px 8px;border-radius:20px;border:1px solid rgba(255,255,255,.15);color:var(--text-muted);}
 
-// ============ SHARED INIT ============
-function initShared() {
-  // Navbar scroll
-  window.addEventListener('scroll', () => {
-    const nav = document.getElementById('mainNav');
-    if(nav) nav.style.background = window.scrollY > 60 ? 'rgba(6,6,8,.97)' : 'rgba(6,6,8,.92)';
-  });
-  // Live search
-  const input = document.getElementById('globalSearch');
-  const dropdown = document.getElementById('searchDropdown');
-  if(input && dropdown) {
-    input.addEventListener('input', () => {
-      const q = input.value.trim();
-      if(q.length < 2) { dropdown.classList.remove('show'); return; }
-      const results = searchAnime(q);
-      if(!results.length) { dropdown.innerHTML='<div style="padding:14px;color:var(--text-muted);font-family:var(--font-heading);font-size:13px">No results found</div>'; dropdown.classList.add('show'); return; }
-      dropdown.innerHTML = results.map(a => `
-        <a href="detail.html?id=${a.id}" class="search-item">
-          <div class="search-item-icon" style="background:${a.bg}">${a.emoji}</div>
-          <div class="search-item-info">
-            <div class="title">${a.title}</div>
-            <div class="sub">★${a.rating} · ${a.type} · ${a.genres[0]}</div>
-          </div>
-        </a>`).join('');
-      dropdown.classList.add('show');
-    });
-    document.addEventListener('click', e => { if(!input.contains(e.target)) dropdown.classList.remove('show'); });
-    input.addEventListener('keydown', e => { if(e.key==='Enter' && input.value.trim()) { window.location.href=`anime-list.html?q=${encodeURIComponent(input.value.trim())}`; } });
-  }
-  // Fade-in on scroll
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if(e.isIntersecting){ e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; } });
-  }, {threshold:0.08});
-  document.querySelectorAll('.observe').forEach(el => {
-    el.style.opacity='0'; el.style.transform='translateY(24px)'; el.style.transition='opacity .6s ease, transform .6s ease';
-    obs.observe(el);
-  });
-}
+/* ============ LIVE BADGE ============ */
+.live-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(255,45,107,.15);border:1px solid rgba(255,45,107,.4);border-radius:20px;padding:3px 10px;font-family:var(--font-display);font-size:9px;font-weight:700;color:var(--neon-pink);letter-spacing:1px;}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--neon-pink);animation:pulse 1s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 
-// ============ ANIME CARD RENDERER ============
-function renderAnimeCard(a, linkPrefix='') {
-  const q = a.quality[0];
-  const isHD = q === '1080p';
-  return `
-  <a href="${linkPrefix}detail.html?id=${a.id}" class="anime-card">
-    <div class="card-thumb" style="background:${a.bg}">
-      ${a.thumb
-        ? `<img
-            src="${a.thumb}"
-            alt="${a.title}"
-            loading="lazy"
-            decoding="async"
-            class="card-thumb-img"
-            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
-           /><span class="card-thumb-fallback">${a.emoji}</span>`
-        : `<span class="card-thumb-fallback" style="display:flex">${a.emoji}</span>`
-      }
-      <div class="card-overlay"><div class="play-btn-overlay">▶</div></div>
-    </div>
-    <span class="quality-badge ${isHD?'hd':''}">${q}</span>
-    <span class="ep-badge">${a.isMovie ? 'MOVIE' : `EP ${a.currentEp}`}</span>
-    <div class="card-info">
-      <div class="card-title">${a.title}</div>
-      <div class="card-sub"><span class="star">★</span>${a.rating} · ${a.language[0]}</div>
-    </div>
-  </a>`;
-}
+/* ============ PAGE HEADER HERO ============ */
+.page-hero{background:var(--bg-dark);padding:48px 40px 40px;border-bottom:1px solid var(--border-glass);position:relative;overflow:hidden;}
+.page-hero .cyber-grid-bg{opacity:.3;}
+.page-hero-title{font-family:var(--font-display);font-size:clamp(24px,4vw,48px);font-weight:900;background:linear-gradient(135deg,#fff,var(--neon-cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;position:relative;}
+.page-hero-sub{color:var(--text-muted);font-size:14px;position:relative;}
+
+/* ============ FILTERS ============ */
+.filters-wrap{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px;align-items:center;}
+.filter-btn{background:var(--bg-glass);border:1px solid var(--border-glass);color:var(--text-muted);border-radius:20px;padding:6px 16px;cursor:pointer;font-family:var(--font-heading);font-weight:600;font-size:12px;transition:all .2s;}
+.filter-btn:hover,.filter-btn.active{border-color:var(--neon-yellow);color:var(--neon-yellow);background:rgba(255,229,0,.08);box-shadow:0 0 10px rgba(255,229,0,.2);}
+.filter-select{background:var(--bg-glass);border:1px solid var(--border-glass);color:var(--text-muted);border-radius:20px;padding:6px 14px;font-family:var(--font-heading);font-weight:600;font-size:12px;outline:none;cursor:pointer;transition:border-color .2s;}
+.filter-select:focus{border-color:var(--neon-cyan);}
+.filter-select option{background:var(--bg-dark);color:var(--text-primary);}
+
+/* ============ ANIME GRID (pages) ============ */
+.anime-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:20px;}
+.anime-grid .anime-card{flex:none;}
+
+/* ============ PAGINATION ============ */
+.pagination{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:48px;flex-wrap:wrap;}
+.page-btn{background:var(--bg-glass);border:1px solid var(--border-glass);color:var(--text-muted);border-radius:8px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:var(--font-heading);font-weight:600;font-size:14px;transition:all .2s;}
+.page-btn:hover,.page-btn.active{border-color:var(--neon-cyan);color:var(--neon-cyan);background:rgba(0,245,255,.08);box-shadow:0 0 12px rgba(0,245,255,.2);}
+
+/* ============ AD BANNERS ============ */
+.ad-banner{background:linear-gradient(90deg,rgba(255,229,0,.04),rgba(0,245,255,.04));border:1px dashed rgba(255,229,0,.15);border-radius:var(--radius);padding:16px 24px;text-align:center;margin:0 40px 28px;font-size:11px;color:var(--text-muted);font-family:var(--font-heading);letter-spacing:.5px;}
+.ad-side{background:rgba(0,245,255,.03);border:1px dashed rgba(0,245,255,.15);border-radius:var(--radius);padding:12px;text-align:center;font-size:11px;color:var(--text-muted);font-family:var(--font-heading);min-height:250px;display:flex;align-items:center;justify-content:center;}
+
+/* ============ FOOTER ============ */
+footer{background:#040405;border-top:1px solid var(--border-glass);padding:56px 40px 24px;}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px;}
+.footer-brand .logo-text{font-size:22px;display:inline-block;margin-bottom:14px;}
+.footer-desc{font-size:13px;color:var(--text-muted);line-height:1.7;margin-bottom:20px;}
+.social-icons{display:flex;gap:10px;}
+.social-btn{width:36px;height:36px;background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;transition:all .2s;}
+.social-btn:hover{border-color:var(--neon-cyan);background:rgba(0,245,255,.1);box-shadow:0 0 12px rgba(0,245,255,.3);transform:translateY(-2px);}
+.footer-col h4{font-family:var(--font-heading);font-weight:700;font-size:14px;color:var(--neon-yellow);margin-bottom:16px;letter-spacing:.5px;text-transform:uppercase;}
+.footer-links{list-style:none;}
+.footer-links li{margin-bottom:9px;}
+.footer-links a{font-size:13px;color:var(--text-muted);display:flex;align-items:center;gap:6px;transition:color .2s;}
+.footer-links a::before{content:'›';color:var(--neon-cyan);}
+.footer-links a:hover{color:var(--neon-cyan);}
+.footer-disclaimer{background:rgba(255,229,0,.04);border:1px solid rgba(255,229,0,.1);border-radius:var(--radius);padding:16px 20px;font-size:11px;color:var(--text-muted);line-height:1.7;margin-bottom:32px;}
+.footer-disclaimer strong{color:var(--neon-yellow);}
+.footer-bottom{border-top:1px solid var(--border-glass);padding-top:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-copy{font-size:12px;color:var(--text-muted);}
+.footer-copy span{color:var(--neon-cyan);}
+
+/* ============ ANIMATIONS ============ */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{animation:fadeInUp .6s ease forwards;}
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:1024px){.footer-top{grid-template-columns:1fr 1fr;}}
+@media(max-width:768px){section{padding:40px 20px;}.page-hero{padding:36px 20px 28px;}.ad-banner{margin:0 20px 20px;}.footer-top{grid-template-columns:1fr;gap:24px;}footer{padding:36px 20px 20px;}.nav-menu{display:none;}.hamburger{display:flex;}}
+@media(max-width:480px){.anime-grid{grid-template-columns:repeat(2,1fr);}.filters-wrap{gap:6px;}}
