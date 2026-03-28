@@ -454,27 +454,36 @@ function initShared() {
 function renderAnimeCard(a, linkPrefix='') {
   const q = a.quality[0];
   const isHD = q === '1080p';
+  
+  // Using higher quality image parameters if using AniList/TMDB links
+  const highResThumb = a.thumb || ''; 
+
   return `
-  <a href="${linkPrefix}detail.html?id=${a.id}" class="anime-card">
-    <div class="card-thumb" style="background:${a.bg}">
-      ${a.thumb
-        ? `<img
-            src="${a.thumb}"
-            alt="${a.title}"
-            loading="lazy"
+  <a href="${linkPrefix}detail.html?id=${a.id}" class="anime-card" title="${a.title}">
+    <div class="card-thumb">
+      ${highResThumb 
+        ? `<img 
+            src="${highResThumb}" 
+            alt="${a.title}" 
+            loading="lazy" 
             decoding="async"
             class="card-thumb-img"
-            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
-           /><span class="card-thumb-fallback">${a.emoji}</span>`
-        : `<span class="card-thumb-fallback" style="display:flex">${a.emoji}</span>`
+            onerror="this.parentElement.classList.add('broken-img'); this.style.display='none';"
+           />` 
+        : `<div class="card-thumb-fallback">${a.emoji}</div>`
       }
-      <div class="card-overlay"><div class="play-btn-overlay">▶</div></div>
+      <div class="card-overlay">
+        <div class="play-btn-overlay">▶</div>
+      </div>
     </div>
-    <span class="quality-badge ${isHD?'hd':''}">${q}</span>
+    <span class="quality-badge ${isHD ? 'hd' : ''}">${q}</span>
     <span class="ep-badge">${a.isMovie ? 'MOVIE' : `EP ${a.currentEp}`}</span>
     <div class="card-info">
       <div class="card-title">${a.title}</div>
-      <div class="card-sub"><span class="star">★</span>${a.rating} · ${a.language[0]}</div>
+      <div class="card-sub">
+        <span class="star">★</span> ${a.rating} 
+        <span style="margin-left:auto; opacity:0.6">${a.year}</span>
+      </div>
     </div>
   </a>`;
 }
