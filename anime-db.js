@@ -318,40 +318,37 @@ function filterAnime({genre, type, lang, quality, status} = {}) {
 }
 
 // ============ SHARED NAVBAR HTML ============
-function renderNavbar(activePage = '') {
-  const pages = [
-    {href:'index.html',label:'Home'},
-    {href:'anime-list.html',label:'Anime List'},
-    {href:'movies.html',label:'Movies'},
-    {href:'dubbed.html',label:'Dubbed'},
-    {href:'subbed.html',label:'Subbed'},
-    {href:'genres.html',label:'Genres'},
-    {href:'popular.html',label:'Popular'},
-    {href:'latest.html',label:'Latest'},
-    {href:'dmca.html',label:'DMCA'},
-    {href:'contact.html',label:'Contact'},
-  ];
+function renderAnimeCard(a, linkPrefix='') {
+  const q = a.quality[0];
+  const isHD = q === '1080p';
+  
   return `
-  <nav class="navbar" id="mainNav">
-    <a href="index.html" class="nav-logo">
-      <div class="logo-icon">GSP</div>
-      <span class="logo-text">GSP ANIME</span>
-    </a>
-    <ul class="nav-menu">
-      ${pages.map(p=>`<li><a href="${p.href}" class="${activePage===p.href?'active':''}">${p.label}</a></li>`).join('')}
-    </ul>
-    <div class="nav-actions">
-      <div class="search-wrap">
-        <input class="search-input" type="text" placeholder="Search anime…" id="globalSearch" autocomplete="off">
-        <span class="search-icon">🔍</span>
-        <div class="search-dropdown" id="searchDropdown"></div>
+  <a href="${linkPrefix}detail.html?id=${a.id}" class="anime-card">
+    <div class="card-thumb">
+      ${a.thumb 
+        ? `<img 
+            src="${a.thumb}" 
+            alt="${a.title}" 
+            loading="lazy" 
+            decoding="async"
+            referrerpolicy="no-referrer"
+            class="card-thumb-img"
+            onerror="this.style.opacity='0'; this.nextElementSibling.style.display='flex';"
+           />` 
+        : ''
+      }
+      <div class="card-thumb-fallback" style="${!a.thumb ? 'display:flex' : 'display:none'}">
+        ${a.emoji}
       </div>
-      <button class="btn-login">⚡ Login</button>
-      <button class="hamburger" aria-label="Menu" onclick="document.querySelector('.nav-menu').style.display=document.querySelector('.nav-menu').style.display==='flex'?'none':'flex'">
-        <span></span><span></span><span></span>
-      </button>
+      <div class="card-overlay"><div class="play-btn-overlay">▶</div></div>
+      <span class="quality-badge ${isHD ? 'hd' : ''}">${q}</span>
+      <span class="ep-badge">${a.isMovie ? 'MOVIE' : `EP ${a.currentEp}`}</span>
     </div>
-  </nav>`;
+    <div class="card-info">
+      <div class="card-title">${a.title}</div>
+      <div class="card-sub"><span class="star">★</span> ${a.rating} · ${a.language[0]}</div>
+    </div>
+  </a>`;
 }
 
 // ============ SHARED FOOTER HTML ============
