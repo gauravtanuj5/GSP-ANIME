@@ -37,7 +37,7 @@ const ANIME_DB = [
     title: "One Piece",
     altTitle: "One Piece — Egghead Arc",
     emoji: "⚓",
-    thumb: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx21-YcayjnyAanMm.jpg",
+    thumb: "https://image.tmdb.org/t/p/w500/x9p65u2670m26brZpXm98cy7M9c.jpg",
     bg: "linear-gradient(135deg,#001a00,#003a00,#001500)",
     rating: 9.1, year: 1999, totalEpisodes: 1085, currentEp: 1085,
     runtime: "24 min", status: "Ongoing", type: "TV Series",
@@ -73,7 +73,7 @@ const ANIME_DB = [
     title: "Demon Slayer S4",
     altTitle: "Demon Slayer: Hashira Training Arc",
     emoji: "⚔️",
-    thumb: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx166240-lXrCiz7UBbMu.jpg",
+    thumb: "https://image.tmdb.org/t/p/w500/86pUjm96be0v7v9m7UM739UAd7L.jpg",
     bg: "linear-gradient(135deg,#1a0000,#3a0000,#200000)",
     rating: 9.2, year: 2024, totalEpisodes: 8, currentEp: 8,
     runtime: "24 min", status: "Completed", type: "TV Series",
@@ -145,7 +145,7 @@ const ANIME_DB = [
     title: "Naruto",
     altTitle: "Naruto — Complete Series",
     emoji: "🍃",
-    thumb: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx20-YBNGqJkBaqbm.jpg",
+    thumb: "https://image.tmdb.org/t/p/w500/38idS52l9uUuI44O9NIsv0OIn8f.jpg",
     bg: "linear-gradient(135deg,#1a0800,#3a1500,#1a0a00)",
     rating: 8.9, year: 2002, totalEpisodes: 220, currentEp: 220,
     runtime: "23 min", status: "Completed", type: "TV Series",
@@ -461,14 +461,16 @@ function renderAnimeCard(a, linkPrefix='') {
   <a href="${linkPrefix}detail.html?id=${a.id}" class="anime-card">
     <div class="card-thumb">
       ${thumbUrl 
-        ? `<img 
-            src="${thumbUrl}" 
-            alt="${a.title}" 
-            loading="lazy" 
-            decoding="async"
-            class="card-thumb-img"
-            onerror="this.style.opacity='0'; this.nextElementSibling.style.display='flex';"
-           />` 
+        ? <img 
+          src="${a.thumb}" 
+          alt="${a.title}" 
+          loading="lazy" 
+          decoding="async"
+          referrerpolicy="no-referrer"
+          crossorigin="anonymous"
+          class="card-thumb-img"
+          onerror="this.style.opacity='0'; this.nextElementSibling.style.display='flex';"
+        />
         : ''
       }
       <div class="card-thumb-fallback" style="${!thumbUrl ? 'display:flex' : 'display:none'}">
