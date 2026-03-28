@@ -8,7 +8,7 @@ const ANIME_DB = [
     title: "Jujutsu Kaisen",
     altTitle: "Jujutsu Kaisen Season 3",
     emoji: "👁️",
-    thumb: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx113415-979NCMpMBj6l.jpg",
+    thumb: "https://image.tmdb.org/t/p/w500/h9zSrgo97Wo1o2Z90607dbqthYn.jpg",
     bg: "linear-gradient(135deg,#0a0015,#4a0080,#1a0030)",
     rating: 9.4,
     year: 2024,
