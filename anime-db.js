@@ -450,39 +450,44 @@ function initShared() {
   });
 }
 
-// ============ ANIME CARD RENDERER ============
 function renderAnimeCard(a, linkPrefix='') {
   const q = a.quality[0];
   const isHD = q === '1080p';
   
-  // Using higher quality image parameters if using AniList/TMDB links
-  const highResThumb = a.thumb || ''; 
+  // Use a fallback for the thumbnail if it's missing
+  const thumbUrl = a.thumb || ''; 
 
   return `
-  <a href="${linkPrefix}detail.html?id=${a.id}" class="anime-card" title="${a.title}">
+  <a href="${linkPrefix}detail.html?id=${a.id}" class="anime-card">
     <div class="card-thumb">
-      ${highResThumb 
+      ${thumbUrl 
         ? `<img 
-            src="${highResThumb}" 
+            src="${thumbUrl}" 
             alt="${a.title}" 
             loading="lazy" 
             decoding="async"
             class="card-thumb-img"
-            onerror="this.parentElement.classList.add('broken-img'); this.style.display='none';"
+            onerror="this.style.opacity='0'; this.nextElementSibling.style.display='flex';"
            />` 
-        : `<div class="card-thumb-fallback">${a.emoji}</div>`
+        : ''
       }
+      <div class="card-thumb-fallback" style="${!thumbUrl ? 'display:flex' : 'display:none'}">
+        ${a.emoji}
+      </div>
+      
       <div class="card-overlay">
         <div class="play-btn-overlay">▶</div>
       </div>
+      
+      <span class="quality-badge ${isHD ? 'hd' : ''}">${q}</span>
+      <span class="ep-badge">${a.isMovie ? 'MOVIE' : `EP ${a.currentEp}`}</span>
     </div>
-    <span class="quality-badge ${isHD ? 'hd' : ''}">${q}</span>
-    <span class="ep-badge">${a.isMovie ? 'MOVIE' : `EP ${a.currentEp}`}</span>
+
     <div class="card-info">
       <div class="card-title">${a.title}</div>
       <div class="card-sub">
-        <span class="star">★</span> ${a.rating} 
-        <span style="margin-left:auto; opacity:0.6">${a.year}</span>
+        <span><span class="star">★</span> ${a.rating}</span>
+        <span style="opacity: 0.5;">${a.type}</span>
       </div>
     </div>
   </a>`;
